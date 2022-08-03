@@ -14,19 +14,32 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://global/math.gd"
 }, {
-"base": "Area2D",
-"class": "Platform",
+"base": "State",
+"class": "PlayerState",
 "language": "GDScript",
-"path": "res://objects/platform/platform.gd"
+"path": "res://objects/player/states/player_state.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://base/state machine/state.gd"
+}, {
+"base": "Node",
+"class": "Util",
+"language": "GDScript",
+"path": "res://global/util.gd"
 } ]
 _global_script_class_icons={
 "Math": "",
-"Platform": ""
+"PlayerState": "",
+"State": "",
+"Util": ""
 }
 
 [application]
 
 config/name="Project-seeker"
+run/main_scene="res://levels/test/test.tscn"
 config/icon="res://icon.png"
 
 [display]
