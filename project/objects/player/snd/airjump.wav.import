@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/airjump.wav-35290bd3f46328149a8afd3179d70a8e.sample"
+
+[deps]
+
+source_file="res://objects/player/snd/airjump.wav"
+dest_files=[ "res://.import/airjump.wav-35290bd3f46328149a8afd3179d70a8e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
