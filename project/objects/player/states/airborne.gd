@@ -18,6 +18,10 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
+static func dampen_jump_velocity(vel : float, damp : float) -> float:
+	var _dampen = vel < 0.0
+	return vel * damp * float(_dampen) + vel * float(!_dampen)
+
 func process(delta : float) -> String:
 	# Set walking velocity like normal
 	player.velocity.x = get_walk_velocity()
@@ -32,7 +36,7 @@ func process(delta : float) -> String:
 	
 	# Soften the jump arc when jump is released
 	if Input.is_action_just_released("jump") && player.velocity.y <= 0.0:
-		player.velocity.y *= jump_dampen
+		player.velocity.y = dampen_jump_velocity(player.velocity.y, player.jump_dampen)
 	
 	# Bonk!
 	if player.is_on_ceiling():
@@ -72,7 +76,7 @@ func process(delta : float) -> String:
 			player.distance_movement(Vector2(0.0, _plat_top.y - _feet.y))
 			player.velocity.y = 0.0
 
-	player.velocity_movement(player.velocity, Vector2.UP)
+	player.velocity_movement(player.velocity, Vector2.UP, false)
 	
 	# Change state
 	if player.is_on_floor():
