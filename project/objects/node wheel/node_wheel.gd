@@ -56,12 +56,6 @@ func _on_update_timeout() -> void:
 	update()
 	get_tree().create_timer(1.0).connect("timeout", self, "_on_update_timeout")
 
-func _process(delta: float) -> void:
-	pass
-#	var _rot_mat = Transform2D(deg2rad(angular_velocity) * delta, Vector2.ZERO)
-#	for n in get_children():
-#		n.position = _rot_mat * n.position
-
 func _physics_process(delta: float) -> void:
 	if !_initialized:
 		init()
@@ -74,3 +68,4 @@ func _draw() -> void:
 	if Engine.editor_hint:
 		for n in get_children():
 			draw_line(Vector2.ZERO, n.position, Color.white)
+	draw_circle(Vector2.ZERO, 4, Color.white)
