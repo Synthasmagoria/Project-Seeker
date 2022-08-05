@@ -1,32 +1,31 @@
 extends KinematicBody2D
 
 # TODO: Move state specific variables into their respective classes
+## The speed at which the player walks
 var walk_speed := 150.0
+## The accumulated velocity
 var velocity := Vector2.ZERO
+## The force of the gravity that pulls the player downwards
 var gravity := 1000.0
-var jump_strength := 450.0
-var airjump_strength := 200.0
-var airjump_number := 1
-var airjump_count := 0
-var jump_dampen := 0.45
+## What direction is up
 var up := Vector2.UP
-var on_floor : bool
-var on_platform : bool
+## A copy of position from the previous frame of movement
 var previous_position : Vector2
+## Length of the vector that is opposite to up
 var snap_distance := 4.0
 
 ## The state machine dictating player behavior
 onready var state_machine := $StateMachine
 
+static func get_snap_vector(length : float, up : Vector2) -> Vector2:
+	return up * -length
+
 static func get_walk_input() -> float:
 	return Input.get_action_strength("right") - Input.get_action_strength("left")
 
-func refresh_airjumps() -> void:
-	airjump_count = 0
-
-func velocity_movement(vel : Vector2, up : Vector2, snap : bool) -> void:
+func velocity_movement(vel : Vector2, snap : bool) -> void:
 	previous_position = position
-	move_and_slide_with_snap(velocity, up * -snap_distance * float(snap), up)
+	move_and_slide_with_snap(vel, get_snap_vector(snap_distance, up) * float(snap), up)
 
 func distance_movement(dist : Vector2) -> void:
 	previous_position = position

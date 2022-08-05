@@ -1,9 +1,6 @@
 extends Area2D
 
-var platform : KinematicBody2D
+var _prev_frame : Array
 
-func _on_PlatformDetector_body_entered(body: Node) -> void:
-	platform = body
-
-func _on_PlatformDetector_body_exited(body: Node) -> void:
-	platform = null
+func _process(delta: float) -> void:
+	_prev_frame = get_overlapping_bodies().duplicate()

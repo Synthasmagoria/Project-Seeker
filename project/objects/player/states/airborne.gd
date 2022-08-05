@@ -6,11 +6,14 @@ var airjump_strength := 300.0
 var jump_dampen := 0.45
 var platform_detector_l : RayCast2D
 var platform_detector_r : RayCast2D
+var platform_detector : Area2D
+var previous_frame_platform : KinematicBody2D
 
 func init(args) -> void:
 	.init(args)
-	platform_detector_l = player.get_node("PlatformDetectorL") as RayCast2D
-	platform_detector_r = player.get_node("PlatformDetectorR") as RayCast2D
+	platform_detector = player.get_node("PlatformDetector") as Area2D
+#	platform_detector_l = player.get_node("PlatformDetectorL") as RayCast2D
+#	platform_detector_r = player.get_node("PlatformDetectorR") as RayCast2D
 
 func enter() -> void:
 	airjump_count = 0
@@ -22,9 +25,19 @@ static func dampen_jump_velocity(vel : float, damp : float) -> float:
 	var _dampen = vel < 0.0
 	return vel * damp * float(_dampen) + vel * float(!_dampen)
 
+static func get_first_overlapping_platform(p_detect_area : Area2D) -> KinematicBody2D:
+	if p_detect_area.get_overlapping_bodies().size() > 0:
+		return p_detect_area.get_overlapping_bodies()[0] as KinematicBody2D
+	else:
+		return null
+
 func process(delta : float) -> String:
 	# Set walking velocity like normal
 	player.velocity.x = get_walk_velocity()
+	
+	# Bonk!
+	if player.is_on_ceiling():
+		player.velocity.y = 0.0
 	
 	# Apply gravity
 	player.velocity.y += get_frame_gravity(delta)
@@ -36,47 +49,23 @@ func process(delta : float) -> String:
 	
 	# Soften the jump arc when jump is released
 	if Input.is_action_just_released("jump") && player.velocity.y <= 0.0:
-		player.velocity.y = dampen_jump_velocity(player.velocity.y, player.jump_dampen)
+		player.velocity.y = dampen_jump_velocity(player.velocity.y, jump_dampen)
 	
-	# Bonk!
-	if player.is_on_ceiling():
-		player.velocity.y = 0.0
+	var _platform = get_first_overlapping_platform(platform_detector)
 	
-	# Collect useful information about platform collisions
-	var _plat = null
-	var _plat_dist = platform_detector_l.cast_to.y
-	var _plat_top := Vector2.ZERO
-	var _plat_hitbox : CollisionShape2D
-	
-	if platform_detector_l.get_collider():
-		_plat = platform_detector_l.get_collider()
-		_plat_hitbox = _plat.get_node("Hitbox")
-		_plat_top = _plat.position + _plat_hitbox.position - _plat_hitbox.shape.extents
-		_plat_dist = _plat_top.distance_to(platform_detector_l.global_position)
-	
-	if platform_detector_r.get_collider():
-		var _plat_r = platform_detector_r.get_collider()
-		var _plat_hitbox_r = _plat_r.get_node("Hitbox")
-		var _plat_top_r = _plat_r.position + _plat_hitbox_r.position - _plat_hitbox_r.shape.extents
-		var _plat_dist_r = _plat_top_r.distance_to(platform_detector_r.global_position)
-		if _plat_dist_r < _plat_dist:
-			_plat = _plat_r
-			_plat_hitbox = _plat_hitbox_r
-			_plat_top = _plat_top_r
-			_plat_dist = _plat_dist_r
-	
-	# Snap
-	if _plat:
+	# Snap to platform if
+	if previous_frame_platform && !_platform:
 		var _hitbox = player.get_node("Hitbox")
 		var _feet = player.position + _hitbox.position + _hitbox.shape.extents
-		var _feet_prev = player.previous_position + _hitbox.position + _hitbox.shape.extents
-		
-		if _plat_top.y < _feet_prev.y && _plat_top.y >= _feet.y:
-			print(_plat_top, _feet, _feet_prev)
+		var _plat_hitbox = previous_frame_platform.get_node("Hitbox")
+		var _plat_top = previous_frame_platform.position - _plat_hitbox.shape.extents
+		if _feet.y < _plat_top.y && player.velocity.y < 0.0:
 			player.distance_movement(Vector2(0.0, _plat_top.y - _feet.y))
 			player.velocity.y = 0.0
-
-	player.velocity_movement(player.velocity, Vector2.UP, false)
+	
+	previous_frame_platform = _platform
+	
+	player.velocity_movement(player.velocity, false)
 	
 	# Change state
 	if player.is_on_floor():

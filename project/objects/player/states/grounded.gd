@@ -22,7 +22,7 @@ func process(delta : float) -> String:
 		player.velocity.y = -jump_strength
 		_jumped = true
 	
-	player.velocity_movement(player.velocity, Vector2.UP, !_jumped)
+	player.velocity_movement(player.velocity, !_jumped)
 	
 	if player.is_on_floor():
 		return KEEP_STATE
