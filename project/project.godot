@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Camera2D",
+"class": "FollowCamera2D",
+"language": "GDScript",
+"path": "res://objects/follow camera/follow_camera.gd"
+}, {
 "base": "Object",
 "class": "Math",
 "language": "GDScript",
 "path": "res://global/math.gd"
+}, {
+"base": "Node2D",
+"class": "NodeWheel",
+"language": "GDScript",
+"path": "res://objects/node wheel/node_wheel.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerAwarePlatform",
@@ -35,7 +45,9 @@ _global_script_classes=[ {
 "path": "res://global/util.gd"
 } ]
 _global_script_class_icons={
+"FollowCamera2D": "",
 "Math": "",
+"NodeWheel": "",
 "PlayerAwarePlatform": "",
 "PlayerState": "",
 "State": "",
@@ -47,6 +59,15 @@ _global_script_class_icons={
 config/name="Project-seeker"
 run/main_scene="res://levels/test/test.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+NodeUtil="*res://global/node_util.gd"
+
+[debug]
+
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

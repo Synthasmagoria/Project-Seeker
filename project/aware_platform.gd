@@ -17,8 +17,13 @@ func set_on(val : bool) -> void:
 func _ready() -> void:
 	set_process(false)
 
-func _process(delta: float) -> void:
-	set_on(player.state_machine.get_current_state().name == "Grounded")
+func _physics_process(delta: float) -> void:
+	var _col = test_move(transform, Vector2.UP * 4.0)
+	if _col:
+		var _player = get_tree().get_nodes_in_group("player")[0]
+		set_on(_player.state_machine.get_current_state().name == "Grounded")
+	else:
+		set_on(false)
 
 func _on_PlayerChecker_body_entered(body: Node) -> void:
 	player = body

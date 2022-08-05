@@ -13,12 +13,14 @@ var up := Vector2.UP
 var previous_position : Vector2
 ## Length of the vector that is opposite to up
 var snap_distance := 4.0
+## The currently stood on platform
+var platform : KinematicBody2D
 
 ## The state machine dictating player behavior
 onready var state_machine := $StateMachine
 
-static func get_snap_vector(length : float, up : Vector2) -> Vector2:
-	return up * -length
+static func get_snap_vector(length : float, v_up : Vector2) -> Vector2:
+	return v_up * -length
 
 static func get_walk_input() -> float:
 	return Input.get_action_strength("right") - Input.get_action_strength("left")

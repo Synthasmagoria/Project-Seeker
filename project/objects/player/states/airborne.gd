@@ -4,16 +4,12 @@ var airjump_count := 0
 var airjump_number := 1
 var airjump_strength := 300.0
 var jump_dampen := 0.45
-var platform_detector_l : RayCast2D
-var platform_detector_r : RayCast2D
 var platform_detector : Area2D
 var previous_frame_platform : KinematicBody2D
 
 func init(args) -> void:
 	.init(args)
 	platform_detector = player.get_node("PlatformDetector") as Area2D
-#	platform_detector_l = player.get_node("PlatformDetectorL") as RayCast2D
-#	platform_detector_r = player.get_node("PlatformDetectorR") as RayCast2D
 
 func enter() -> void:
 	airjump_count = 0
@@ -51,20 +47,21 @@ func process(delta : float) -> String:
 	if Input.is_action_just_released("jump") && player.velocity.y <= 0.0:
 		player.velocity.y = dampen_jump_velocity(player.velocity.y, jump_dampen)
 	
+	# Snap to platform
 	var _platform = get_first_overlapping_platform(platform_detector)
-	
-	# Snap to platform if
 	if previous_frame_platform && !_platform:
-		var _hitbox = player.get_node("Hitbox")
+		var _hitbox = player.get_node("Hitbox") as CollisionShape2D
 		var _feet = player.position + _hitbox.position + _hitbox.shape.extents
 		var _plat_hitbox = previous_frame_platform.get_node("Hitbox")
-		var _plat_top = previous_frame_platform.position - _plat_hitbox.shape.extents
+		var _plat_top = previous_frame_platform.global_position - _plat_hitbox.shape.extents
+		
 		if _feet.y < _plat_top.y && player.velocity.y < 0.0:
 			player.distance_movement(Vector2(0.0, _plat_top.y - _feet.y))
 			player.velocity.y = 0.0
 	
 	previous_frame_platform = _platform
 	
+	# Do the regular movement
 	player.velocity_movement(player.velocity, false)
 	
 	# Change state
