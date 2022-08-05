@@ -1,6 +1,8 @@
 extends PlayerState
 
 var jump_strength := 400.0
+## Platform currently standing on
+var platform : KinematicBody2D
 
 func enter() -> void:
 	pass
