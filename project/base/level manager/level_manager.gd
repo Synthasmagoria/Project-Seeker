@@ -2,6 +2,8 @@ extends Node
 
 ## Path pointing to the resource of the currently loaded level
 var current_level_path : String
+# Current level instance
+var _level : Node
 
 const LEVEL_GROUP_NAME = "levels"
 
@@ -21,8 +23,11 @@ func reload() -> void:
 
 ## Removes the current room from the scene tree
 func clear() -> void:
-	for n in $Caducous.get_children():
-		n.queue_free()
+	if _level:
+		_level.queue_free()
+		_level = null
+#	for n in $Caducous.get_children():
+#		n.queue_free()
 
 ## Removes all instances, including persistent ones
 func reset() -> void:
@@ -40,6 +45,9 @@ func instance_persistent(scene : PackedScene) -> Node:
 func is_level_loaded() -> bool:
 	return $Caducous.get_child_count() > 0
 
+## Returns true if the passed node is a child of the current level
+func is_in_current_level(node : Node) -> bool:
+	return _level.is_a_parent_of(node)
 
 func _ready() -> void:
 	# When play scene is called on a level this will make sure that
@@ -47,6 +55,10 @@ func _ready() -> void:
 	_add_first_in_group()
 #	if is_level_loaded():
 #		Game.state = Game.STATE.IN_GAME
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		reload()
 
 # Adds first level from a group as child of the level manager
 func _add_first_in_group() -> void:
@@ -68,7 +80,9 @@ func _set_level(level : Node) -> void:
 	if _level_parent == self:
 		print("LevelManager: The level is already loaded")
 		return
-	if _level_parent:
-		_level_parent.call_deferred("remove_child", level)
+#	if _level_parent:
+#		_level_parent.call_deferred("remove_child", level)
+	_level = level
 	current_level_path = level.filename
-	$Caducous.call_deferred("add_child", level)
+	if !_level_parent:
+		$Caducous.call_deferred("add_child", level)

@@ -43,8 +43,9 @@ static func kinematic_collision_get_platform(col : KinematicCollision2D) -> Kine
 		return null
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		die()
+	pass
+#	if Input.is_action_just_pressed("ui_accept"):
+#		die()
 
 ## Forces player into the 'Dead' state
 func die() -> void:

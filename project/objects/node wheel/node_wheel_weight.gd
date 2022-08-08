@@ -24,7 +24,7 @@ export(PathEndResponse) var path_reached_beginning_response
 export(PathEndResponse) var path_reached_end_response
 
 func _ready() -> void:
-	var _player = NodeUtil.get_first_node_in_group("player")
+	var _player = NodeUtil.get_first_node_in_group_in_current_level("player")
 	if _player:
 		_player.connect("entered_platform", self, "_on_player_entered_platform", [_player])
 		_player.connect("exited_platform", self, "_on_player_exited_platform", [_player])
