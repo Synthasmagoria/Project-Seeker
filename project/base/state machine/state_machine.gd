@@ -1,5 +1,7 @@
 extends Node
 
+## TODO: Replace printerr with assert
+
 ## First state to be pushed to the stack on init
 export(String) var default_state
 ## Stack of states, topmost state (aka. last in the array) is the current state

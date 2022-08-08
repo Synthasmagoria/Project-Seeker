@@ -57,7 +57,7 @@ func _ready() -> void:
 #		Game.state = Game.STATE.IN_GAME
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("reload"):
 		reload()
 
 # Adds first level from a group as child of the level manager
@@ -69,16 +69,14 @@ func _add_first_in_group() -> void:
 # Loads a level from a path and adds it to the scene tree
 func _load_level_from_path(path : String) -> void:
 	var _scene = load(path)
-	if !_scene:
-		printerr("LevelManager: Couldn't load level from ", path)
-		return
+	assert(_scene, "LevelManager: Couldn't load level from " + path)
 	_set_level(_scene.instance())
 
 # Sets a level as current and adds it to the scene tree
 func _set_level(level : Node) -> void:
 	var _level_parent = level.get_parent()
 	if _level_parent == self:
-		print("LevelManager: The level is already loaded")
+		push_error("LevelManager: The level is already loaded")
 		return
 #	if _level_parent:
 #		_level_parent.call_deferred("remove_child", level)
