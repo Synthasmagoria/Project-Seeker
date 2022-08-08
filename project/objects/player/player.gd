@@ -48,6 +48,7 @@ func _process(delta: float) -> void:
 
 ## Forces player into the 'Dead' state
 func die() -> void:
+	print("died")
 	if state_machine.get_current_state().name != "Dead":
 		state_machine.push_by_name("Dead")
 
