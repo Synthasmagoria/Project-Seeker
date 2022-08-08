@@ -48,9 +48,9 @@ func _process(delta: float) -> void:
 
 ## Forces player into the 'Dead' state
 func die() -> void:
-	print("died")
 	if state_machine.get_current_state().name != "Dead":
 		state_machine.push_by_name("Dead")
+	set_platform(null)
 
 func velocity_movement(vel : Vector2, snap : bool) -> void:
 	previous_position = position
@@ -63,7 +63,6 @@ func velocity_movement(vel : Vector2, snap : bool) -> void:
 			if _plat_col:
 				set_platform(kinematic_collision_get_platform(_plat_col))
 				platform_velocity = _plat_col.collider_velocity
-				print(platform_velocity)
 				break
 	else:
 		set_platform(null)

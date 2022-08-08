@@ -24,9 +24,7 @@ func _draw() -> void:
 
 func _on_AwarePlatform_player_entered() -> void:
 	momentum = 100.0 * direction
-	print("entered")
 
 
 func _on_AwarePlatform_player_left() -> void:
 	momentum = 0.0
-	print("left")

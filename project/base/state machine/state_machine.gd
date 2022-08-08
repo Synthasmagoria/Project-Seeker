@@ -49,7 +49,6 @@ func _step(delta: float) -> void:
 	if _new_state == "_":
 		pop()
 	elif !_new_state.empty():
-		print(_new_state)
 		push_by_name(_new_state)
 
 func _process(delta: float) -> void:

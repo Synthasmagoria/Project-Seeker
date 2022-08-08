@@ -18,3 +18,11 @@ static func get_rectangle_shape_rect(col_shape : CollisionShape2D) -> Rect2:
 static func call_on_children(node : Node, f : FuncRef, args : Array = []) -> void:
 	for n in node.get_children():
 		n.callv(f, args)
+
+## Checks if the signal is connected, if it isn't then connects
+static func connect_safe(source : Object, signal_name : String, target : Object, method : String, binds := [], flags := 0) -> bool:
+	if source.is_connected(signal_name, target, method):
+		return false
+	else:
+		source.connect(signal_name, target, method, binds, flags)
+		return true

@@ -59,7 +59,6 @@ func _process(delta: float) -> void:
 		set_angular_velocity(_new_av)
 
 func _physics_process(delta: float) -> void:
-	var _path_follow = get_node(path_follow_path)
 	if is_instance_valid(_path_follow):
 		_path_follow.offset += angular_velocity * path_movement_speed * delta
 

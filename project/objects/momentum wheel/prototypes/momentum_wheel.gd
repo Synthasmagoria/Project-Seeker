@@ -36,7 +36,6 @@ func _physics_process(delta: float) -> void:
 	for n in $Platforms.get_children():
 		_collision = n.move_and_collide(path_follow.position - previous_position)
 		if _collision: # move other node out of the way
-			print(_collision.collider.move_and_collide(_collision.remainder))
 			n.move_and_collide(_collision.remainder)
 
 func _on_AwarePlatform_player_entered(platform : PlayerAwarePlatform) -> void:
