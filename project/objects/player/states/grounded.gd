@@ -1,8 +1,6 @@
 extends PlayerState
 
 var jump_strength := 400.0
-## Platform currently standing on
-var platform : KinematicBody2D
 
 func enter() -> void:
 	pass
@@ -23,6 +21,9 @@ func process(delta : float) -> String:
 	if Input.is_action_just_pressed("jump"):
 		player.velocity.y = -jump_strength
 		_jumped = true
+		# Add platform velocity to player's velocity when jumping off a platform
+		if player.platform:
+			player.velocity.y += min(0.0, player.platform_velocity.y)
 	
 	player.velocity_movement(player.velocity, !_jumped)
 	

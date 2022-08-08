@@ -50,7 +50,7 @@ func process(delta : float) -> String:
 	# Snap to platform
 	var _platform = get_first_overlapping_platform(platform_detector)
 	if previous_frame_platform && !_platform:
-		var _hitbox = player.get_node("Hitbox") as CollisionShape2D
+		var _hitbox = $"%KinematicHitbox"
 		var _feet = player.position + _hitbox.position + _hitbox.shape.extents
 		var _plat_hitbox = previous_frame_platform.get_node("Hitbox")
 		var _plat_top = previous_frame_platform.global_position - _plat_hitbox.shape.extents

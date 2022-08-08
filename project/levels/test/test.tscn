@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://objects/solidmap/solids_16.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/player/player.tscn" type="PackedScene" id=2]
@@ -19,8 +19,7 @@ script/source = "extends PathFollow2D
 export(float) var speed = 100.0
 
 func _ready() -> void:
-#	tween()
-	pass
+	tween()
 #	var _tw = create_tween()
 #	_tw.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 #	_tw.tween_property(self, \"unit_offset\", 1.0, 2.0)
@@ -45,6 +44,11 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 224, 160, 2.97302, 51.136, -2.97302, -51.136, 160, 16, 0, 0, 0, 0, 224, -80, 0, 0, 0, 0, 272, 48 )
 }
 
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 624, 336, 1.7818, 86.4172, -1.7818, -86.4172, 832, 208, -5.34539, 72.1628, 5.34539, -72.1628, 624, 128, 0, 0, 0, 0, 816, -16 )
+}
+
 [node name="Test" type="Node2D"]
 __meta__ = {
 "_edit_vertical_guides_": [  ]
@@ -59,7 +63,7 @@ current = true
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 128, 80 )
+position = Vector2( 576, 288 )
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( 48, 32 )
@@ -95,7 +99,7 @@ playback_process_mode = 0
 curve = SubResource( 7 )
 
 [node name="PathFollow" type="PathFollow2D" parent="WheelPath"]
-position = Vector2( 223, 160 )
+position = Vector2( 224, 160 )
 rotate = false
 loop = false
 
@@ -106,7 +110,6 @@ automatic_spacing = true
 automatic_distance = 64.0
 automatic_distancing = true
 weight_factor = 3.0
-friction = 1.0
 path_follow_path = NodePath("..")
 path_reached_end_response = 1
 
@@ -121,5 +124,279 @@ position = Vector2( -2.79753e-06, 64 )
 
 [node name="Platform8" parent="WheelPath/PathFollow/NodeWheelWeight" instance=ExtResource( 4 )]
 position = Vector2( -64, 9.66373e-06 )
+
+[node name="Platform" parent="." instance=ExtResource( 4 )]
+position = Vector2( 448, -240 )
+
+[node name="NodeWheel" type="Node2D" parent="."]
+position = Vector2( 448, -256 )
+script = ExtResource( 6 )
+angular_velocity = 25.0
+automatic_spacing = true
+automatic_distance = 144.0
+automatic_distancing = true
+
+[node name="NodeWheel" type="Node2D" parent="NodeWheel"]
+position = Vector2( -6.29444e-06, -144 )
+script = ExtResource( 6 )
+angular_velocity = 75.0
+automatic_spacing = true
+automatic_distance = 56.0
+automatic_distancing = true
+
+[node name="NodeWheel" type="Node2D" parent="NodeWheel/NodeWheel"]
+position = Vector2( -2.44784e-06, -56 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel2" type="Node2D" parent="NodeWheel/NodeWheel"]
+position = Vector2( 48.4974, 28 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel3" type="Node2D" parent="NodeWheel/NodeWheel"]
+position = Vector2( -48.4974, 28 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel2" type="Node2D" parent="NodeWheel"]
+position = Vector2( 144, 0 )
+script = ExtResource( 6 )
+angular_velocity = 75.0
+automatic_spacing = true
+automatic_distance = 56.0
+automatic_distancing = true
+
+[node name="NodeWheel" type="Node2D" parent="NodeWheel/NodeWheel2"]
+position = Vector2( -2.44784e-06, -56 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel2/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel2/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel2/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel2" type="Node2D" parent="NodeWheel/NodeWheel2"]
+position = Vector2( 48.4974, 28 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel2/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel2/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel2/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel3" type="Node2D" parent="NodeWheel/NodeWheel2"]
+position = Vector2( -48.4974, 28 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel2/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel2/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel2/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel3" type="Node2D" parent="NodeWheel"]
+position = Vector2( -6.29444e-06, 144 )
+script = ExtResource( 6 )
+angular_velocity = 75.0
+automatic_spacing = true
+automatic_distance = 56.0
+automatic_distancing = true
+
+[node name="NodeWheel" type="Node2D" parent="NodeWheel/NodeWheel3"]
+position = Vector2( -2.44784e-06, -56 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel3/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel3/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel3/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel2" type="Node2D" parent="NodeWheel/NodeWheel3"]
+position = Vector2( 48.4974, 28 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel3/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel3/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel3/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel3" type="Node2D" parent="NodeWheel/NodeWheel3"]
+position = Vector2( -48.4974, 28 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel3/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel3/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel3/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel4" type="Node2D" parent="NodeWheel"]
+position = Vector2( -144, 2.17434e-05 )
+script = ExtResource( 6 )
+angular_velocity = 75.0
+automatic_spacing = true
+automatic_distance = 56.0
+automatic_distancing = true
+
+[node name="NodeWheel" type="Node2D" parent="NodeWheel/NodeWheel4"]
+position = Vector2( -2.44784e-06, -56 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel4/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel4/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel4/NodeWheel" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel2" type="Node2D" parent="NodeWheel/NodeWheel4"]
+position = Vector2( 48.4974, 28 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel4/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel4/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel4/NodeWheel2" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="NodeWheel3" type="Node2D" parent="NodeWheel/NodeWheel4"]
+position = Vector2( -48.4974, 28 )
+script = ExtResource( 6 )
+automatic_spacing = true
+automatic_distance = 28.0
+automatic_distancing = true
+
+[node name="Platform" parent="NodeWheel/NodeWheel4/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( -1.22392e-06, -28 )
+
+[node name="Platform2" parent="NodeWheel/NodeWheel4/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( 24.2487, 14 )
+
+[node name="Platform3" parent="NodeWheel/NodeWheel4/NodeWheel3" instance=ExtResource( 4 )]
+position = Vector2( -24.2487, 14 )
+
+[node name="WindingPath" type="Path2D" parent="."]
+curve = SubResource( 8 )
+
+[node name="Follower" type="PathFollow2D" parent="WindingPath"]
+position = Vector2( 624, 336 )
+rotate = false
+
+[node name="NodeWheelWeight" type="Node2D" parent="WindingPath/Follower"]
+script = ExtResource( 3 )
+angular_velocity = 0.0
+automatic_spacing = true
+automatic_distance = 48.0
+automatic_distancing = true
+friction = 0.1
+path_movement_speed = 0.629
+path_follow_path = NodePath("..")
+path_reached_beginning_response = 1
+path_reached_end_response = 1
+
+[node name="Platform" parent="WindingPath/Follower/NodeWheelWeight" instance=ExtResource( 4 )]
+position = Vector2( -2.09815e-06, -48 )
+moving_platform_apply_velocity_on_leave = 2
+
+[node name="Platform5" parent="WindingPath/Follower/NodeWheelWeight" instance=ExtResource( 4 )]
+position = Vector2( 45.6507, -14.8328 )
+moving_platform_apply_velocity_on_leave = 2
+
+[node name="Platform2" parent="WindingPath/Follower/NodeWheelWeight" instance=ExtResource( 4 )]
+position = Vector2( 28.2137, 38.8328 )
+moving_platform_apply_velocity_on_leave = 2
+
+[node name="Platform3" parent="WindingPath/Follower/NodeWheelWeight" instance=ExtResource( 4 )]
+position = Vector2( -28.2137, 38.8328 )
+moving_platform_apply_velocity_on_leave = 2
+
+[node name="Platform4" parent="WindingPath/Follower/NodeWheelWeight" instance=ExtResource( 4 )]
+position = Vector2( -45.6507, -14.8328 )
+moving_platform_apply_velocity_on_leave = 2
 
 [connection signal="tween_completed" from="Path2D/PathFollow2D/Tween" to="Path2D/PathFollow2D" method="_on_Tween_tween_completed"]

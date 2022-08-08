@@ -78,9 +78,9 @@ gdscript/warnings/return_value_discarded=false
 [display]
 
 window/size/width=512
-window/size/height=300
+window/size/height=512
 window/size/test_width=1024
-window/size/test_height=600
+window/size/test_height=1024
 window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
@@ -128,6 +128,7 @@ up={
 2d_physics/layer_1="Solids"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Platforms"
+2d_physics/layer_4="Killer"
 
 [network]
 

@@ -60,12 +60,12 @@ func _physics_process(delta: float) -> void:
 	if !_initialized:
 		init()
 		_initialized = true
-	
+	update()
 	for n in get_children():
 		n.position = _rotation_matrix * n.position
 
 func _draw() -> void:
-	if Engine.editor_hint:
-		for n in get_children():
-			draw_line(Vector2.ZERO, n.position, Color.white)
+#	if Engine.editor_hint:
+	for n in get_children():
+		draw_line(Vector2.ZERO, n.position, Color.white)
 	draw_circle(Vector2.ZERO, 4, Color.white)

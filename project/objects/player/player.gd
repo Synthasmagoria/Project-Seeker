@@ -21,6 +21,8 @@ func set_platform(val : KinematicBody2D) -> void:
 	elif !val && platform:
 		emit_signal("exited_platform", platform)
 	platform = val
+## The velocity of the collided platform
+var platform_velocity : Vector2
 
 ## The state machine dictating player behavior
 onready var state_machine := $StateMachine
@@ -40,13 +42,28 @@ static func kinematic_collision_get_platform(col : KinematicCollision2D) -> Kine
 	else:
 		return null
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		die()
+
+## Forces player into the 'Dead' state
+func die() -> void:
+	if state_machine.get_current_state().name != "Dead":
+		state_machine.push_by_name("Dead")
+
 func velocity_movement(vel : Vector2, snap : bool) -> void:
 	previous_position = position
 	move_and_slide_with_snap(vel, get_snap_vector(snap_distance, up) * float(snap), up)
 	
 	## Scan slide collisions for platform
 	if get_slide_count() > 0:
-		set_platform(kinematic_collision_get_platform(get_slide_collision(0)))
+		for i in get_slide_count():
+			var _plat_col = get_slide_collision(i)
+			if _plat_col:
+				set_platform(kinematic_collision_get_platform(_plat_col))
+				platform_velocity = _plat_col.collider_velocity
+				print(platform_velocity)
+				break
 	else:
 		set_platform(null)
 
@@ -56,3 +73,9 @@ func distance_movement(dist : Vector2) -> void:
 
 func _ready() -> void:
 	state_machine.init([self])
+
+func _on_KillerDetector_area_entered(area: Area2D) -> void:
+	die()
+
+func _on_KillerDetector_body_entered(body: Node) -> void:
+	die()
