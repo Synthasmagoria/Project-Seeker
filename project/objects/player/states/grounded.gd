@@ -8,7 +8,7 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func process(delta : float) -> String:
+func physics_process(delta : float) -> String:
 	# Apply walking velocity
 	player.velocity.x = get_walk_velocity()
 	

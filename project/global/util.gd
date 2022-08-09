@@ -26,3 +26,11 @@ static func connect_safe(source : Object, signal_name : String, target : Object,
 	else:
 		source.connect(signal_name, target, method, binds, flags)
 		return true
+
+static func get_children_2d(node : Node) -> Array:
+	var _children = node.get_children()
+	var _children_2d = []
+	for n in _children:
+		if n as Node2D:
+			_children_2d.push_back(n)
+	return _children_2d

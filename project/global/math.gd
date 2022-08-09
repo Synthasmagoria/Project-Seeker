@@ -8,6 +8,9 @@ static func clamp_v2(v : Vector2, mn : Vector2, mx : Vector2) -> Vector2:
 static func floor_v2(v : Vector2) -> Vector2:
 	return Vector2(floor(v.x), floor(v.y))
 
+static func rotate_v2_90cc(v : Vector2) -> Vector2:
+	return Vector2(v.y, -v.x)
+
 static func int_set_bit(i : int, bit : int, val : bool) -> int:
 	return (i | (1 << bit)) & ~(int(!val) << bit)
 

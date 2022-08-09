@@ -40,7 +40,7 @@ static func get_first_overlapping_platform(p_detect_area : Area2D) -> KinematicB
 	else:
 		return null
 
-func process(delta : float) -> String:
+func physics_process(delta : float) -> String:
 	# Set walking velocity like normal
 	player.velocity.x = get_walk_velocity()
 	

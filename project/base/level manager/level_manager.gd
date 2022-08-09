@@ -62,9 +62,9 @@ func _process(delta: float) -> void:
 
 # Adds first level from a group as child of the level manager
 func _add_first_in_group() -> void:
-	var _level = NodeUtil.get_first_node_in_group("levels")
-	if _level:
-		_set_level(_level)
+	var _lv = NodeUtil.get_first_node_in_group("levels")
+	if _lv:
+		_set_level(_lv)
 
 # Loads a level from a path and adds it to the scene tree
 func _load_level_from_path(path : String) -> void:

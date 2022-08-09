@@ -29,3 +29,6 @@ func exit():
 # <state_name> = push <state_name> onto state stack
 func process(delta : float) -> String:
 	return KEEP_STATE
+
+func physics_process(delta : float) -> String:
+	return KEEP_STATE

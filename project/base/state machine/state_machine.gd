@@ -2,6 +2,8 @@ extends Node
 
 ## TODO: Replace printerr with assert
 
+class_name StateMachine
+
 ## First state to be pushed to the stack on init
 export(String) var default_state
 ## Stack of states, topmost state (aka. last in the array) is the current state
@@ -11,7 +13,7 @@ var continuous_state_processing : bool
 # Step function name
 var _step_func_name : String
 
-enum ProcessMode{OFF, PROCESS, PHYSICS}
+enum ProcessMode{MANUAL, PROCESS, PHYSICS, BOTH}
 
 export(ProcessMode) var process_mode = ProcessMode.PROCESS
 
@@ -24,40 +26,42 @@ func init(args : Array = []):
 
 func _ready():
 	match process_mode:
-		ProcessMode.OFF:
+		ProcessMode.MANUAL:
 			set_process(false)
 			set_physics_process(false)
 		ProcessMode.PROCESS:
 			set_physics_process(false)
 		ProcessMode.PHYSICS:
 			set_process(false)
+		ProcessMode.BOTH:
+			pass # Do nothing, process & physics_process are activated by default
 	
 	if continuous_state_processing:
 		_step_func_name = "_step_continuous"
 	else:
 		_step_func_name = "_step"
 
-func _step_continuous(delta: float) -> void:
-	var _new_state = get_current_state().process(delta)
+func _step_continuous(delta: float, funcname : String) -> void:
+	var _new_state = get_current_state().call(funcname, delta)
 	while !_new_state.empty():
 		if _new_state == "_":
 			pop()
 		else:
 			push_by_name(_new_state)
-		_new_state = get_current_state().process(delta)
+		_new_state = get_current_state().call(funcname, delta)
 
-func _step(delta: float) -> void:
-	var _new_state = get_current_state().process(delta)
+func _step(delta: float, funcname : String) -> void:
+	var _new_state = get_current_state().call(funcname, delta)
 	if _new_state == "_":
 		pop()
 	elif !_new_state.empty():
 		push_by_name(_new_state)
 
 func _process(delta: float) -> void:
-	call(_step_func_name, delta)
+	call(_step_func_name, delta, "process")
 
 func _physics_process(delta: float) -> void:
-	call(_step_func_name, delta)
+	call(_step_func_name, delta, "physics_process")
 
 # States
 func get_current_state() -> Object:

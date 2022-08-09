@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://base/state machine/state_machine.gd" type="Script" id=1]
+[ext_resource path="res://objects/node wheel/node_wheel_state.gd" type="Script" id=2]
+[ext_resource path="res://objects/node wheel/states/weighed.gd" type="Script" id=3]
+[ext_resource path="res://objects/node wheel/states/path.gd" type="Script" id=5]
+[ext_resource path="res://objects/node wheel/states/gravity.gd" type="Script" id=6]
+
+[node name="NodeWheelState" type="Node2D"]
+script = ExtResource( 2 )
+angular_velocity = 0.0
+automatic_spacing = true
+automatic_distance = 67.184
+automatic_distancing = true
+first_state = "Path"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+default_state = "Weighed"
+process_mode = 2
+
+[node name="Weighed" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Path" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+weight_factor = 5.0
+friction = 0.928
+
+[node name="Gravity" type="Node" parent="StateMachine"]
+unique_name_in_owner = true
+script = ExtResource( 6 )
