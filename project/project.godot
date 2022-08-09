@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://objects/node wheel/node_wheel_weight.gd"
 }, {
+"base": "PathFollow2D",
+"class": "PathCouplingPoint2D",
+"language": "GDScript",
+"path": "res://objects/path_coupling_point.gd"
+}, {
+"base": "PathFollow2D",
+"class": "PathFollowDetector2D",
+"language": "GDScript",
+"path": "res://objects/path_follow_detector.gd"
+}, {
 "base": "State",
 "class": "PlayerState",
 "language": "GDScript",
@@ -64,6 +74,8 @@ _global_script_class_icons={
 "Math": "",
 "NodeWheel": "",
 "NodeWheelWeight": "",
+"PathCouplingPoint2D": "",
+"PathFollowDetector2D": "",
 "PlayerState": "",
 "State": "",
 "StateMachine": "",
@@ -75,7 +87,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Project-seeker"
-run/main_scene="res://levels/test.tscn"
+run/main_scene="res://levels/level_1.tscn"
 config/icon="res://icon.png"
 
 [autoload]

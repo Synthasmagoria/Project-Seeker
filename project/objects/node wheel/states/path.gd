@@ -9,12 +9,35 @@ export(bool) var follow_path
 # The reference of the path to follow
 onready var _path_follow : PathFollow2D = get_node(path_follow_path)
 #
+
+#
 var _detaching : bool
 
 ## The action to perform when the end of a path has been reached
 enum PathEndResponse{SPIN, STOP, DETACH}
 export(PathEndResponse) var path_reached_beginning_response
 export(PathEndResponse) var path_reached_end_response
+
+func enter() -> void:
+	if _path_follow is PathFollowDetector2D:
+		_path_follow.connect("path_follow_passed", self, "_on_path_follow_passed")
+
+func get_path_follow_direction(pf : PathFollow2D) -> Vector2:
+	var _curve = pf.get_parent().curve as Curve2D
+	return _curve.interpolate_baked(pf.offset + 1.0) - _curve.interpolate_baked(pf.offset)
+
+func is_couple_direction_adjacent(src : PathFollow2D, dest : PathFollow2D) -> bool:
+	return get_path_follow_direction(src).dot(get_path_follow_direction(dest)) >= 0.0
+
+## Couples the wheel into another path
+func path_couple(pcp : PathCouplingPoint2D) -> void:
+	if !pcp || !is_couple_direction_adjacent(_path_follow, pcp.coupling_point):
+		print("nope")
+	else:
+		print("yep")
+
+func _on_path_follow_passed(pf : PathFollow2D) -> void:
+	path_couple(pf)
 
 func path_end_reached(pf : PathFollow2D, av : float) -> bool:
 	return get_next_path_follow_offset(pf, av) > get_path_follow_curve_length(pf)
