@@ -4,6 +4,7 @@ var airjump_count := 0
 var airjump_number := 1
 var airjump_strength := 300.0
 var jump_dampen := 0.45
+var fall_speed_max := 490.0
 var platform_detector : Area2D
 var previous_frame_platform : KinematicBody2D
 
@@ -16,6 +17,18 @@ func enter() -> void:
 
 func exit() -> void:
 	pass
+
+static func limit_fall_velocity(vel : Vector2, limit : float) -> Vector2:
+	return Vector2(vel.x, min(vel.y, limit))
+
+static func get_bottom(shape : CollisionShape2D) -> Vector2:
+	return shape.global_position + shape.shape.extents
+
+static func get_top(shape : CollisionShape2D) -> Vector2:
+	return shape.global_position - shape.shape.extents
+
+static func should_snap(feet : Vector2, platform_top : Vector2, velocity : Vector2) -> bool:
+	return feet.y < platform_top.y && velocity.y < 0.0
 
 static func dampen_jump_velocity(vel : float, damp : float) -> float:
 	var _dampen = vel < 0.0
@@ -49,17 +62,19 @@ func process(delta : float) -> String:
 	
 	# Snap to platform
 	var _platform = get_first_overlapping_platform(platform_detector)
+	
 	if previous_frame_platform && !_platform:
-		var _hitbox = $"%KinematicHitshape"
-		var _feet = player.position + _hitbox.position + _hitbox.shape.extents
-		var _plat_hitbox = previous_frame_platform.get_node("Hitbox")
-		var _plat_top = previous_frame_platform.global_position - _plat_hitbox.shape.extents
+		var _feet = get_bottom($"%KinematicHitshape")
+		var _plat_top = get_top(previous_frame_platform.get_node("Hitbox"))
 		
-		if _feet.y < _plat_top.y && player.velocity.y < 0.0:
+		if should_snap(_feet, _plat_top, player.velocity):
 			player.distance_movement(Vector2(0.0, _plat_top.y - _feet.y))
 			player.velocity.y = 0.0
 	
 	previous_frame_platform = _platform
+	
+	# Limit falling velocity
+	player.velocity = limit_fall_velocity(player.velocity, fall_speed_max)
 	
 	# Do the regular movement
 	player.velocity_movement(player.velocity, false)
