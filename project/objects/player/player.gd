@@ -6,7 +6,7 @@ var walk_speed := 150.0
 ## The accumulated velocity
 var velocity := Vector2.ZERO
 ## The force of the gravity that pulls the player downwards
-var gravity := 1000.0
+var gravity := 800.0
 ## What direction is up
 var up := Vector2.UP
 ## A copy of position from the previous frame of movement

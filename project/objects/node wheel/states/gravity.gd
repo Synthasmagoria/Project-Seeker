@@ -12,4 +12,4 @@ func physics_process(delta : float) -> String:
 	
 	wheel.step()
 	
-	return "KEEP_STATE"
+	return KEEP_STATE
