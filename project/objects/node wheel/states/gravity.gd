@@ -2,7 +2,7 @@ extends WheelState
 
 var velocity : Vector2
 ##
-export(float) var gravity = 1000.0
+export(float) var gravity = 200.0
 
 func physics_process(delta : float) -> String:
 	
