@@ -81,6 +81,9 @@ func physics_process(delta : float) -> String:
 	
 	# Change state
 	if player.is_on_floor():
-		return "Grounded"
+		return POP_STATE
 	else:
-		return KEEP_STATE
+		if Input.is_action_pressed("down") && Input.is_action_pressed("jump"):
+			return "DownDash"
+		else:
+			return KEEP_STATE

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://objects/player/hitshape.tres" type="Shape2D" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://base/state machine/state_machine.gd" type="Script" id=4]
 [ext_resource path="res://objects/player/states/grounded.gd" type="Script" id=5]
 [ext_resource path="res://objects/player/states/airborne.gd" type="Script" id=6]
+[ext_resource path="res://objects/player/states/down_dash.gd" type="Script" id=7]
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
@@ -47,6 +48,9 @@ script = ExtResource( 6 )
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
+
+[node name="DownDash" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
 
 [connection signal="area_entered" from="KillerDetector" to="." method="_on_KillerDetector_area_entered"]
 [connection signal="body_entered" from="KillerDetector" to="." method="_on_KillerDetector_body_entered"]

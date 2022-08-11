@@ -23,6 +23,8 @@ func set_platform(val : KinematicBody2D) -> void:
 	platform = val
 ## The velocity of the collided platform
 var platform_velocity : Vector2
+##
+var platform_dashed : bool
 
 ## The state machine dictating player behavior
 onready var state_machine := $StateMachine
@@ -59,6 +61,7 @@ func velocity_movement(vel : Vector2, snap : bool) -> void:
 			if _plat_col:
 				set_platform(kinematic_collision_get_platform(_plat_col))
 				platform_velocity = _plat_col.collider_velocity
+				platform_dashed = state_machine.get_current_state().name == "DownDash"
 				break
 	else:
 		set_platform(null)
