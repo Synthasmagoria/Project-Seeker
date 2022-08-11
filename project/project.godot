@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "State",
+"class": "EnemyState",
+"language": "GDScript",
+"path": "res://objects/enemy/states/enemy_state.gd"
+}, {
 "base": "Camera2D",
 "class": "FollowCamera2D",
 "language": "GDScript",
@@ -70,6 +75,7 @@ _global_script_classes=[ {
 "path": "res://objects/node wheel/states/weighed.gd"
 } ]
 _global_script_class_icons={
+"EnemyState": "",
 "FollowCamera2D": "",
 "Math": "",
 "NodeWheel": "",

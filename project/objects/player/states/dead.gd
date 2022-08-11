@@ -19,4 +19,5 @@ func disable_hitshapes() -> void:
 
 func enter() -> void:
 	disable_hitshapes()
+	player.dead = true
 	player.set_platform(null)

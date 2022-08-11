@@ -27,6 +27,8 @@ func physics_process(delta : float) -> String:
 	
 	player.velocity_movement(player.velocity, !_jumped)
 	
+	player.refresh_airjumps()
+	
 	if player.get_enemy_collision() || player.get_killer_collision():
 		return "Dead"
 	elif player.is_on_floor():

@@ -1,7 +1,5 @@
 extends PlayerState
 
-var airjump_count := 0
-var airjump_number := 1
 var airjump_strength := 300.0
 var jump_dampen := 0.45
 var fall_speed_max := 490.0
@@ -13,14 +11,8 @@ func init(args) -> void:
 	.init(args)
 	platform_detector = player.get_node("PlatformDetector") as Area2D
 
-func enter() -> void:
-	airjump_count = 0
-
 func exit() -> void:
 	pass
-
-func add_airjump() -> void:
-	airjump_count = max(airjump_count - 1, 0)
 
 static func limit_fall_velocity(vel : Vector2, limit : float) -> Vector2:
 	return Vector2(vel.x, min(vel.y, limit))
@@ -56,9 +48,9 @@ func physics_process(delta : float) -> String:
 	player.velocity.y += get_frame_gravity(delta)
 	
 	# Jump in the air if there are airjumps left
-	if Input.is_action_just_pressed("jump") && airjump_count < airjump_number:
+	if Input.is_action_just_pressed("jump") && player.can_airjump():
 		player.velocity.y = -airjump_strength
-		airjump_count += 1
+		player.count_airjump()
 	
 	# Soften the jump arc when jump is released
 	if Input.is_action_just_released("jump") && player.velocity.y <= 0.0:

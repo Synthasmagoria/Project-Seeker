@@ -10,6 +10,8 @@ export(float, 0.1, 5.0) var friction = 1.0
 var _player : KinematicBody2D
 ## Reference to the weighed platform
 var _weighed_platform : KinematicBody2D
+## Dash multiplier
+var dash_multiplier := 60.0
 
 func init(args) -> void:
 	.init(args)
@@ -24,7 +26,7 @@ func get_platform_weight(plat : KinematicBody2D, play : KinematicBody2D, factor 
 	if is_instance_valid(plat):
 		var _plat_up = Math.rotate_v2_90cc(plat.position).normalized()
 		var _regular_weight = play.up.dot(_plat_up) * factor
-		var _frame_weight = _regular_weight + _regular_weight * 50.0 * float(_player.platform_dashed)
+		var _frame_weight = _regular_weight + _regular_weight * dash_multiplier * float(_player.platform_dashed)
 		_player.platform_dashed = false
 		return _frame_weight
 	else:

@@ -57,6 +57,7 @@ func physics_process(delta : float) -> String:
 				var _pcp = n as PathCouplingPoint2D
 				if _pcp && is_couple_direction_adjacent(_path_follow, _direction, _pcp.coupling_point, _pcp.coupling_direction):
 					# Calculate total travel distance
+					
 					var _remainder = abs(_vel * delta)
 					# Figure out the distance between the current path follow offset and coupling path follow offset
 					var _move = _pcp.coupling_point.global_position - _path_follow.global_position

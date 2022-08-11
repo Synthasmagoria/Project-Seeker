@@ -31,12 +31,33 @@ var platform_velocity : Vector2
 var platform_dashed : bool
 ##
 export(PackedScene) var spell_scene
+##
+var airjump_count := 0
+##
+var airjump_number := 1
+##
+var dead = false
 
 ## The state machine dictating player behavior
 onready var state_machine := $StateMachine
 
 signal entered_platform(plat)
 signal exited_platform(plat)
+
+func refresh_airjumps() -> void:
+	airjump_count = 0
+
+func add_airjump() -> void:
+	airjump_count -= 1
+
+func remove_airjumps() -> void:
+	airjump_count = airjump_number
+
+func count_airjump() -> void:
+	airjump_count = min(airjump_count + 1, airjump_number)
+
+func can_airjump() -> bool:
+	return airjump_count < airjump_number
 
 static func get_snap_vector(length : float, v_up : Vector2) -> Vector2:
 	return v_up * -length
@@ -74,11 +95,6 @@ func get_platform_collision() -> KinematicCollision2D:
 			return get_slide_collision(i)
 	return null
 
-## Forces player into the 'Dead' state
-func die() -> void:
-	if state_machine.get_current_state().name != "Dead":
-		state_machine.push_by_name("Dead")
-
 func shoot() -> void:
 	var _projectile = spell_scene.instance()
 	_projectile.global_position = global_position
@@ -88,8 +104,7 @@ func shoot() -> void:
 	LevelManager.add_to_level(_projectile)
 
 func _on_spell_enemy_hit(enemy) -> void:
-	if state_machine.get_current_state().name == "Airborne":
-		state_machine.get_current_state().add_airjump()
+	add_airjump()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
