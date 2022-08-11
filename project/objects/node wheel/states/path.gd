@@ -102,7 +102,6 @@ func physics_process(delta : float) -> String:
 		if !_coupled:
 			var _path_prev_pos = _path_follow.position
 			_path_follow.offset += _vel * delta
-			print(_path_prev_pos, _path_follow.position)
 			
 			if follow_path:
 				if _detaching:

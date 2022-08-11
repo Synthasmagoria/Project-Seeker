@@ -19,3 +19,4 @@ func disable_hitshapes() -> void:
 
 func enter() -> void:
 	disable_hitshapes()
+	player.set_platform(null)

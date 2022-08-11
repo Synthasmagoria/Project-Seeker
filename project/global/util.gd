@@ -5,7 +5,9 @@ class_name Util
 enum COLLISION_MASK_BIT {
 	SOLID,
 	PLAYER,
-	PLATFORM
+	PLATFORM,
+	KILLER,
+	PROJECTILE
 }
 
 static func get_rectangle_shape_top(col_shape : CollisionShape2D) -> Vector2:

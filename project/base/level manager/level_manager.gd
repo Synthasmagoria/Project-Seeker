@@ -41,6 +41,12 @@ func instance_persistent(scene : PackedScene) -> Node:
 	$Persistent.add_child(_instance)
 	return _instance
 
+func add_to_level(node : Node) -> void:
+	_level.add_child(node)
+
+func get_level() -> Node:
+	return _level
+
 ## Returns true if there is a level loaded
 func is_level_loaded() -> bool:
 	return $Caducous.get_child_count() > 0

@@ -7,6 +7,7 @@ var jump_dampen := 0.45
 var fall_speed_max := 490.0
 var platform_detector : Area2D
 var previous_frame_platform : KinematicBody2D
+var enemy_bounce := 450.0
 
 func init(args) -> void:
 	.init(args)
@@ -17,6 +18,9 @@ func enter() -> void:
 
 func exit() -> void:
 	pass
+
+func add_airjump() -> void:
+	airjump_count = max(airjump_count - 1, 0)
 
 static func limit_fall_velocity(vel : Vector2, limit : float) -> Vector2:
 	return Vector2(vel.x, min(vel.y, limit))
@@ -79,11 +83,24 @@ func physics_process(delta : float) -> String:
 	# Do the regular movement
 	player.velocity_movement(player.velocity, false)
 	
-	# Change state
-	if player.is_on_floor():
-		return POP_STATE
-	else:
-		if Input.is_action_pressed("down") && Input.is_action_pressed("jump"):
-			return "DownDash"
+	var _enemy_col = player.get_enemy_collision()
+	var _enemy_death = false
+	
+	if _enemy_col:
+		if _enemy_col.normal.dot(player.up) == 1.0:
+			player.velocity.y = -enemy_bounce
+			_enemy_col.collider.die()
 		else:
-			return KEEP_STATE
+			_enemy_death = true
+	
+	# Change state
+	if player.get_killer_collision() || _enemy_death:
+		return "Dead"
+	
+	if player.is_on_floor() && !_enemy_col:
+		return POP_STATE
+	
+	if Input.is_action_pressed("down") && Input.is_action_pressed("jump"):
+		return "DownDash"
+	
+	return KEEP_STATE
