@@ -42,7 +42,10 @@ func instance_persistent(scene : PackedScene) -> Node:
 	return _instance
 
 func add_to_level(node : Node) -> void:
-	_level.add_child(node)
+	if _level:
+		_level.add_child(node)
+	else:
+		$Caducous.add_child(node)
 
 func get_level() -> Node:
 	return _level

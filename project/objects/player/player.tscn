@@ -19,15 +19,6 @@ spell_scene = ExtResource( 8 )
 unique_name_in_owner = true
 shape = ExtResource( 2 )
 
-[node name="KillerDetector" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="KillerHitshape" type="CollisionShape2D" parent="KillerDetector"]
-unique_name_in_owner = true
-shape = ExtResource( 2 )
-
 [node name="PlatformDetector" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4

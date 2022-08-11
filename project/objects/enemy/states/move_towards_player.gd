@@ -48,5 +48,4 @@ func exit() -> void:
 	disconnect_from_agent()
 
 func _on_velocity_computed(safe_velocity : Vector2) -> void:
-	print(safe_velocity)
 	enemy.move_and_slide(safe_velocity)

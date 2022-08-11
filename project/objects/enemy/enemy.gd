@@ -14,8 +14,6 @@ func die() -> void:
 	queue_free()
 
 
-
-
 func _on_PlayerDetector_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		player = body

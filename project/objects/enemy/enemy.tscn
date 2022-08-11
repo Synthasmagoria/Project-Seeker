@@ -13,7 +13,7 @@
 radius = 48.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 89.2749
+radius = 160.012
 
 [node name="Enemy" type="KinematicBody2D" groups=["enemies"]]
 modulate = Color( 1, 0, 0, 0.862745 )
@@ -28,7 +28,7 @@ avoidance_enabled = true
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
-default_state = "MoveTowardsPlayer"
+default_state = "Observe"
 process_mode = 2
 
 [node name="MoveTowardsPlayer" type="Node" parent="StateMachine"]
