@@ -1,7 +1,7 @@
 extends Node
 
 const PLAYER_SCENE_PATH = "res://objects/player/player.tscn"
-const FIRST_LEVEL_SCENE_PATH = "res://levels/level_intro.tscn"
+const FIRST_LEVEL_SCENE_PATH = "res://levels/mountain/level_1.tscn"
 var player
 
 # TODO: Add a bunch of button checks for settings like
