@@ -96,7 +96,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[node name="Menu" type="CanvasLayer"]
+[node name="Menu" type="CanvasLayer" groups=["menu"]]
 script = ExtResource( 1 )
 
 [node name="Visuals" type="Control" parent="."]
@@ -193,3 +193,5 @@ script = ExtResource( 7 )
 
 [node name="Invisible" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
+
+[connection signal="state_changed" from="StateMachine" to="." method="_on_StateMachine_state_changed"]

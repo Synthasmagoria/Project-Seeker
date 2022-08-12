@@ -6,8 +6,7 @@ var finished = false
 
 func enter() -> void:
 	finished = false
-	var _player = NodeUtil.get_first_node_in_group_in_current_level("player")
-	var _direction = enemy.global_position.direction_to(_player.global_position)
+	var _direction = enemy.global_position.direction_to(Game.player.global_position)
 	var _tween = create_tween()
 	_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	_tween.tween_property(enemy, "global_position", enemy.global_position + _direction * attack_distance, attack_duration)

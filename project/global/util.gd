@@ -29,6 +29,13 @@ static func connect_safe(source : Object, signal_name : String, target : Object,
 		source.connect(signal_name, target, method, binds, flags)
 		return true
 
+static func disconnect_safe(source : Object, signal_name : String, target : Object, method : String) -> bool:
+	if !source.is_connected(signal_name, target, method):
+		return false
+	else:
+		source.disconnect(signal_name, target, method)
+		return true
+
 static func get_children_2d(node : Node) -> Array:
 	var _children = node.get_children()
 	var _children_2d = []

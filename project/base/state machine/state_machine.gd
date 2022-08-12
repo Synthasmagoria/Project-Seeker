@@ -17,6 +17,8 @@ enum ProcessMode{MANUAL, PROCESS, PHYSICS, BOTH}
 
 export(ProcessMode) var process_mode = ProcessMode.PROCESS
 
+signal state_changed(from, to)
+
 func init(args : Array = []):
 	for n in get_children():
 		n.callv("init", args)
@@ -75,16 +77,21 @@ func get_stack_size() -> int:
 
 ## @desc: Pops current (topmost/last) last state of the stack
 func pop():
-	get_current_state().exit()
+	var _prev_state = get_current_state()
+	_prev_state.exit()
 	state_stack.pop_back()
 	get_current_state().enter()
+	emit_signal("state_changed", _prev_state, get_current_state())
 
 ## @desc: Pushes a state to the state stack and makes it current
 func push(_state : Object):
+	var _prev_state = null
 	if state_stack.size() > 0:
-		get_current_state().exit()
+		_prev_state = get_current_state()
+		_prev_state.exit()
 	state_stack.append(_state)
 	get_current_state().enter()
+	emit_signal("state_changed", _prev_state, get_current_state())
 
 func push_by_name(val : String):
 	var _new_state = get_state_by_name(val)

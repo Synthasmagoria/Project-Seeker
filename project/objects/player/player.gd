@@ -59,6 +59,9 @@ func count_airjump() -> void:
 func can_airjump() -> bool:
 	return airjump_count < airjump_number
 
+func is_dead() -> bool:
+	return state_machine.get_current_state().name == "Dead"
+
 static func get_snap_vector(length : float, v_up : Vector2) -> Vector2:
 	return v_up * -length
 
@@ -106,6 +109,10 @@ func shoot() -> void:
 func _on_spell_enemy_hit(enemy) -> void:
 	add_airjump()
 
+func _ready() -> void:
+	state_machine.init([self])
+	Game.player = self
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		shoot()
@@ -130,5 +137,7 @@ func distance_movement(dist : Vector2) -> void:
 	previous_position = position
 	move_and_collide(dist)
 
-func _ready() -> void:
-	state_machine.init([self])
+
+func _on_Player_tree_exiting() -> void:
+	if Game.player == self:
+		Game.player = null

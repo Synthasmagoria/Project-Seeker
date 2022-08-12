@@ -27,10 +27,9 @@ export(PathEndResponse) var path_reached_end_response
 
 func _ready() -> void:
 	if !Engine.editor_hint:
-		var _player = NodeUtil.get_first_node_in_group_in_current_level("player")
-		if _player:
-			_player.connect("entered_platform", self, "_on_player_entered_platform", [_player])
-			_player.connect("exited_platform", self, "_on_player_exited_platform", [_player])
+		if Game.player:
+			Game.player.connect("entered_platform", self, "_on_player_entered_platform", [_player])
+			Game.player.connect("exited_platform", self, "_on_player_exited_platform", [_player])
 
 func _process(delta: float) -> void:
 	pass

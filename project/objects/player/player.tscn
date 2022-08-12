@@ -44,3 +44,5 @@ script = ExtResource( 3 )
 
 [node name="DownDash" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
+
+[connection signal="tree_exiting" from="." to="." method="_on_Player_tree_exiting"]

@@ -16,12 +16,15 @@ func enter() -> void:
 	connect_to_agent()
 
 func get_path_to_player() -> Array:
-	var _player = NodeUtil.get_first_node_in_group_in_current_level("player")
-	var _p = Navigation2DServer.map_get_path(
-			enemy.get_world_2d().get_navigation_map(),
-			enemy.global_position,
-			_player.global_position,
-			false)
+	var _p = []
+	if Game.player:
+		_p = Navigation2DServer.map_get_path(
+				enemy.get_world_2d().get_navigation_map(),
+				enemy.global_position,
+				Game.player.global_position,
+				false)
+	else:
+		printerr("Player doesn't exist")
 	return _p
 
 func physics_process(delta : float) -> String:

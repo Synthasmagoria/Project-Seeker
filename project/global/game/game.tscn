@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://global/game/game.gd" type="Script" id=1]
+[ext_resource path="res://global/game/states/in_menu.gd" type="Script" id=2]
+[ext_resource path="res://base/state machine/state_machine.gd" type="Script" id=3]
+[ext_resource path="res://global/game/states/in_game.gd" type="Script" id=4]
+
+[node name="Game" type="Node"]
+script = ExtResource( 1 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+default_state = "InMenu"
+
+[node name="InMenu" type="Node" parent="StateMachine"]
+script = ExtResource( 2 )
+
+[node name="InGame" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Debug" type="Node2D" parent="."]

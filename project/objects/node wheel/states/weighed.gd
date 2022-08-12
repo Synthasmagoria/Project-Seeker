@@ -15,7 +15,7 @@ var dash_multiplier := 60.0
 
 func init(args) -> void:
 	.init(args)
-	connect_to_player(NodeUtil.get_first_node_in_group_in_current_level("player"))
+	connect_to_player(Game.player)
 
 func connect_to_player(play) -> void:
 	if play:

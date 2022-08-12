@@ -9,9 +9,12 @@ export(bool) var recheck_post_exit
 var target : Node2D
 
 func _ready() -> void:
-	update_target()
+	get_tree().connect("idle_frame", self, "update_target", [], CONNECT_ONESHOT)
 
 func _process(delta: float) -> void:
+	follow_target()
+
+func follow_target() -> void:
 	position = target.position
 
 func _on_target_tree_exiting() -> void:
@@ -25,3 +28,5 @@ func update_target() -> void:
 	if is_instance_valid(target):
 		set_process(true)
 		Util.connect_safe(target, "tree_exiting", self, "_on_target_tree_exiting")
+	else:
+		set_process(false)

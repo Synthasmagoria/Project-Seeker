@@ -7,6 +7,8 @@ var _level : Node
 
 const LEVEL_GROUP_NAME = "levels"
 
+signal level_changed
+
 ## Loads a level using a packed scene and sets
 func change(level : PackedScene) -> void:
 	clear()
@@ -15,7 +17,8 @@ func change(level : PackedScene) -> void:
 ## Loads a level and replaces it with the current level at the end of the frame
 func change_from_path(path : String) -> void:
 	clear()
-	call_deferred("_load_level_from_path", path)
+	_load_level_from_path(path)
+#	call_deferred("_load_level_from_path", path)
 
 ## Reloads the currently loaded room
 func reload() -> void:
@@ -35,20 +38,20 @@ func reset() -> void:
 	for n in $Persistent.get_children():
 		n.queue_free()
 
-## Instances a scene that will not be removed by the level manager
-func instance_persistent(scene : PackedScene) -> Node:
-	var _instance = scene.instance()
-	$Persistent.add_child(_instance)
-	return _instance
-
 func add_to_level(node : Node) -> void:
 	if _level:
 		_level.add_child(node)
 	else:
 		$Caducous.add_child(node)
 
-func get_level() -> Node:
+func add_to_level_persistent(node : Node) -> void:
+	$Persistent.add_child(node)
+
+func get_current_level() -> Node:
 	return _level
+
+func get_current_level_path() -> String:
+	return current_level_path
 
 ## Returns true if there is a level loaded
 func is_level_loaded() -> bool:
@@ -58,6 +61,9 @@ func is_level_loaded() -> bool:
 func is_in_current_level(node : Node) -> bool:
 	return _level.is_a_parent_of(node)
 
+func is_persistent(node : Node) -> bool:
+	return $Persistent.is_a_parent_of(node)
+
 func _ready() -> void:
 	# When play scene is called on a level this will make sure that
 	# it gets added as child of the level manager
@@ -65,13 +71,9 @@ func _ready() -> void:
 #	if is_level_loaded():
 #		Game.state = Game.STATE.IN_GAME
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("reload"):
-		reload()
-
 # Adds first level from a group as child of the level manager
 func _add_first_in_group() -> void:
-	var _lv = NodeUtil.get_first_node_in_group("levels")
+	var _lv = NodeUtil.get_first_node_in_group(LEVEL_GROUP_NAME)
 	if _lv:
 		_set_level(_lv)
 
@@ -91,5 +93,6 @@ func _set_level(level : Node) -> void:
 #		_level_parent.call_deferred("remove_child", level)
 	_level = level
 	current_level_path = level.filename
+	emit_signal("level_changed")
 	if !_level_parent:
 		$Caducous.call_deferred("add_child", level)
