@@ -58,7 +58,6 @@ collision_mask = 2
 monitorable = false
 script = ExtResource( 5 )
 level_scene_path = "res://levels/mountain/level_2.tscn"
-displace_using_level_bounds = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="Warp" index="0"]
 shape = SubResource( 1 )

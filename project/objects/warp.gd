@@ -5,7 +5,7 @@ class_name Warp2D
 
 export(String, FILE) var level_scene_path
 
-export(bool) var displace_using_level_bounds
+export(bool) var displace_using_level_bounds = true
 
 var _warping : bool
 

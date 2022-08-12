@@ -40,16 +40,15 @@ position = Vector2( 912, 552 )
 [node name="PlayerStart" parent="." index="8" instance=ExtResource( 3 )]
 position = Vector2( 896, 514 )
 
-[node name="Warp" type="Area2D" parent="." index="9"]
+[node name="WarpDown" type="Area2D" parent="." index="9"]
 position = Vector2( 896, 624 )
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource( 4 )
 level_scene_path = "res://levels/mountain/level_1.tscn"
-displace_using_level_bounds = true
 
-[node name="Hitbox" type="CollisionShape2D" parent="Warp" index="0"]
+[node name="Hitbox" type="CollisionShape2D" parent="WarpDown" index="0"]
 shape = SubResource( 1 )
 
 [node name="WarpUp" type="Area2D" parent="." index="10"]
@@ -59,7 +58,6 @@ collision_mask = 2
 monitorable = false
 script = ExtResource( 4 )
 level_scene_path = "res://levels/mountain/level_1.tscn"
-displace_using_level_bounds = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="WarpUp" index="0"]
 shape = SubResource( 2 )
