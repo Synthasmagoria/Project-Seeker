@@ -3,7 +3,7 @@ extends Node
 ## Default save data
 const DEFAULT_DATA := {
 	"position" : Vector2.ZERO,
-	"level_path" : "res://levels/level_intro.tscn"
+	"level_path" : "res://levels/mountain/level_1.tscn"
 }
 
 ## File name that will be used to write the save to a file

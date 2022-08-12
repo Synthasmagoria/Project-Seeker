@@ -7,7 +7,7 @@ export(NodePath) var path_follow_path
 ## Whether the wheel should follow the path follow node or not
 export(bool) var follow_path = true
 # The reference of the path to follow
-onready var _path_follow : PathFollow2D = get_node(path_follow_path)
+onready var _path_follow : PathFollow2D = get_node_or_null(path_follow_path)
 #
 
 #
