@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rocks_and_patterns.png-1f8a60cf1d95e3ee8934cf89d1b04b49.stex"
+path="res://.import/spike.png-2452204bd72e6775ca26f691a3b6c012.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/visuals/rocks_and_patterns.png"
-dest_files=[ "res://.import/rocks_and_patterns.png-1f8a60cf1d95e3ee8934cf89d1b04b49.stex" ]
+source_file="res://objects/spike/spike.png"
+dest_files=[ "res://.import/spike.png-2452204bd72e6775ca26f691a3b6c012.stex" ]
 
 [params]
 

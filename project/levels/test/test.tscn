@@ -388,9 +388,6 @@ follow_path = true
 path_reached_beginning_response = 1
 path_reached_end_response = 2
 
-[node name="Gravity" parent="NodeWheelState/StateMachine" index="2"]
-gravity = 200.0
-
 [node name="Platform" parent="NodeWheelState" instance=ExtResource( 4 )]
 position = Vector2( -2.09815e-06, -48 )
 

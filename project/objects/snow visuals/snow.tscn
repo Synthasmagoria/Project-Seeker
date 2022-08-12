@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://levels/snow_visuals.gd" type="Script" id=1]
+[ext_resource path="res://objects/snow visuals/snow.gd" type="Script" id=1]
 [ext_resource path="res://ui/menu/scrolling_texture.tres" type="Shader" id=2]
 [ext_resource path="res://objects/snow visuals/snow_back.png" type="Texture" id=3]
 [ext_resource path="res://objects/snow visuals/snow_front.png" type="Texture" id=4]

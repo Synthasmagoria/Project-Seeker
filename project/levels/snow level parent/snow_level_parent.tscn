@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://levels/snow level parent/tilesets/rock_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://levels/snow level parent/tilesets/snow_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://objects/snow visuals/snow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/player/player start/player_start.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/spike/spike.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/level.gd" type="Script" id=6]
+[ext_resource path="res://levels/snow level parent/tilesets/rock_background_tileset.tres" type="TileSet" id=10]
+[ext_resource path="res://objects/solidmap/solids_32.tscn" type="PackedScene" id=11]
+
+[node name="Level" type="Node2D" groups=["levels"]]
+script = ExtResource( 6 )
+
+[node name="SnowyVisuals" parent="." instance=ExtResource( 3 )]
+hide_snow_fg = true
+
+[node name="BackgroundRocks" type="TileMap" parent="."]
+z_index = -2
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Rocks" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 589848, 0, 4, 655383, 0, 1, 655384, 0, 196616, 720917, 0, 1, 720918, 0, 2, 720919, 0, 65536, 720920, 0, 131075, 786453, 0, 65537, 786454, 0, 65538, 786455, 0, 65539, 851984, 0, 1, 851985, 0, 2, 851986, 0, 2, 851987, 0, 2, 851988, 0, 2, 851989, 0, 65542, 851990, 0, 65538, 851991, 0, 65539, 917520, 0, 65537, 917521, 0, 65538, 917522, 0, 65538, 917523, 0, 65538, 917524, 0, 65538, 917525, 0, 65538, 917526, 0, 5, 917527, 0, 131075, 983047, 0, 196609, 983048, 0, 196610, 983049, 0, 196610, 983050, 0, 196610, 983051, 0, 196610, 983052, 0, 196610, 983053, 0, 196610, 983054, 0, 196610, 983055, 0, 196610, 983056, 0, 65544, 983057, 0, 65538, 983058, 0, 5, 983059, 0, 131074, 983060, 0, 131074, 983061, 0, 131074, 983062, 0, 131075, 1048592, 0, 131073, 1048593, 0, 131074, 1048594, 0, 131075 )
+
+[node name="Snow" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Solids" parent="." instance=ExtResource( 11 )]
+z_index = 2
+tile_data = PoolIntArray( 720917, 0, 0, 786453, 0, 0, 851984, 0, 0, 851985, 0, 0, 851986, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 917520, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0 )
+
+[node name="Spikes" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 1638432, 0, 0, 1638433, 0, 0, 1638434, 0, 0, 1638435, 0, 0, 1638436, 0, 0, 1638437, 0, 0, 1638438, 0, 0, 1638439, 0, 0, 1638440, 0, 0, 1638441, 0, 0 )
+
+[node name="PlayerStart" parent="." instance=ExtResource( 4 )]
+position = Vector2( 400, 464 )
