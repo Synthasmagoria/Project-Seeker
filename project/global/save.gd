@@ -23,11 +23,12 @@ func reset() -> void:
 func save() -> void:
 	_data = data.duplicate(true)
 
-func collect_data_and_save() -> void:
+func collect_save_write() -> void:
 	if Game.player:
 		data.level_path = LevelManager.get_current_level_path()
 		data.position = Game.player.global_position
 		save()
+		write()
 
 func load() -> void:
 	data = _data.duplicate(true)

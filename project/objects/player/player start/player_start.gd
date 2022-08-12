@@ -11,4 +11,4 @@ func _ready() -> void:
 		LevelManager.add_to_level_persistent(_player)
 		
 		if save_on_create:
-			Save.collect_data_and_save()
+			Save.collect_save_write()

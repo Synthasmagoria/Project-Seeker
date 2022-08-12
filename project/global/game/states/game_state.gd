@@ -4,5 +4,5 @@ class_name GameState
 
 var game
 
-func init(gm) -> void:
-	game = gm
+func init() -> void:
+	pass

@@ -22,6 +22,11 @@ func exit() -> void:
 
 func _on_menu_start_game() -> void:
 	pass_state = "InGame"
+	if Save.exists():
+		Save.read()
+		Game.load_game(true)
+	else:
+		Game.new_game()
 
 func _on_level_changed() -> void:
 	pass_state = "InGame"

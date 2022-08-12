@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/checkpoint/checkpoint.gd" type="Script" id=1]
+
+[node name="Checkpoint" type="Area2D"]
+modulate = Color( 0.596078, 1, 0.521569, 0.498039 )
+script = ExtResource( 1 )
+extents = Vector2( 32, 32 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+
+[node name="Cooldown" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_Checkpoint_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Checkpoint_body_exited"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]
