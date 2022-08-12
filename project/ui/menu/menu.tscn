@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://ui/menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://objects/solidmap/solid.png" type="Texture" id=2]
@@ -60,6 +60,42 @@ shader_param/color_range_max = 1.361
 size = 32
 font_data = ExtResource( 4 )
 
+[sub_resource type="DynamicFont" id=10]
+size = 24
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 1 )
 
@@ -119,6 +155,17 @@ material = SubResource( 7 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="Title" type="RichTextLabel" parent="Visuals"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 768.0
+margin_top = 256.0
+margin_right = 768.0
+margin_bottom = 256.0
+custom_fonts/normal_font = SubResource( 8 )
+text = "Seeker test
+"
+
 [node name="Instruction" type="RichTextLabel" parent="Visuals"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -126,8 +173,13 @@ margin_left = 768.0
 margin_top = 288.0
 margin_right = 768.0
 margin_bottom = 288.0
-custom_fonts/normal_font = SubResource( 8 )
+custom_fonts/normal_font = SubResource( 10 )
 text = "Press buttons"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/Instruction"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 11 )
+anims/RESET = SubResource( 12 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )

@@ -5,8 +5,8 @@
 [ext_resource path="res://objects/platform/platform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/spikes/spikes.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/follow camera/follow_camera.gd" type="Script" id=5]
-[ext_resource path="res://objects/node_wheel_path_follow.tscn" type="PackedScene" id=6]
-[ext_resource path="res://objects/path_coupling_point.gd" type="Script" id=7]
+[ext_resource path="res://objects/node wheel/path follow/node_wheel_path_follow.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/node wheel/path_coupling_point.gd" type="Script" id=7]
 [ext_resource path="res://objects/enemy/enemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/solidmap/solids_32.tscn" type="PackedScene" id=10]
 

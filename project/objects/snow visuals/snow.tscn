@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://levels/snow_visuals.gd" type="Script" id=1]
+[ext_resource path="res://ui/menu/scrolling_texture.tres" type="Shader" id=2]
+[ext_resource path="res://objects/snow visuals/snow_back.png" type="Texture" id=3]
+[ext_resource path="res://objects/snow visuals/snow_front.png" type="Texture" id=4]
+[ext_resource path="res://objects/snow visuals/snow_middle.png" type="Texture" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/velocity = Vector2( 2, -2 )
+shader_param/scale = Vector2( 1, 1 )
+shader_param/offset = Vector2( 0, 0 )
+
+[node name="SnowyVisuals" type="Control"]
+margin_right = 1024.0
+margin_bottom = 608.0
+script = ExtResource( 1 )
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -3
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+margin_right = 1024.0
+margin_bottom = 608.0
+color = Color( 0.231373, 0.231373, 0.298039, 1 )
+
+[node name="SnowBg" type="TextureRect" parent="Background"]
+material = SubResource( 1 )
+margin_right = 1024.0
+margin_bottom = 608.0
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="SnowMiddle" type="TextureRect" parent="Background"]
+material = SubResource( 1 )
+margin_right = 1024.0
+margin_bottom = 608.0
+texture = ExtResource( 5 )
+stretch_mode = 2
+
+[node name="Foreground" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="SnowFg" type="TextureRect" parent="Foreground"]
+material = SubResource( 1 )
+margin_right = 1024.0
+margin_bottom = 608.0
+texture = ExtResource( 4 )
+stretch_mode = 2
