@@ -3,9 +3,9 @@ extends WheelState
 class_name WheelStateWeighed
 
 ## The significance to momentum of the weight put onto the the wheel's platforms by the player
-export(float, 0.1, 5.0) var weight_factor = 2.0
+export(float, 0.0, 16.0) var weight_factor = 5.0
 ## The rate at which the wheel slows its rotation
-export(float, 0.1, 5.0) var friction = 1.0
+export(float, 0.0, 1.0) var friction = 0.1
 ## Reference to the player
 var _player : KinematicBody2D
 ## Reference to the weighed platform

@@ -1,11 +1,11 @@
 extends WheelStateWeighed
 
 ## The speed at which the wheel moves along its path
-export(float, 0.1, 5.0) var path_movement_speed = 1.0
+export(float, 0.1, 5.0) var path_movement_speed = 0.6
 ## The path to follow as the wheel rotates
 export(NodePath) var path_follow_path
 ## Whether the wheel should follow the path follow node or not
-export(bool) var follow_path
+export(bool) var follow_path = true
 # The reference of the path to follow
 onready var _path_follow : PathFollow2D = get_node(path_follow_path)
 #
