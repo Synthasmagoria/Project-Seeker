@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/snow_tiles.png-4f789251a42363d5d32bfb6ba8f62ca2.stex"
+path="res://.import/snow_tiles.png-0a2ae04be4d032483f37d597c9799ab7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/snow level parent/tilesets/snow_tiles.png"
-dest_files=[ "res://.import/snow_tiles.png-4f789251a42363d5d32bfb6ba8f62ca2.stex" ]
+source_file="res://levels/mountain/tilesets/snow_tiles.png"
+dest_files=[ "res://.import/snow_tiles.png-0a2ae04be4d032483f37d597c9799ab7.stex" ]
 
 [params]
 

@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://global/util.gd"
 }, {
+"base": "Area2D",
+"class": "Warp2D",
+"language": "GDScript",
+"path": "res://objects/warp.gd"
+}, {
 "base": "State",
 "class": "WheelState",
 "language": "GDScript",
@@ -104,6 +109,7 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "Util": "",
+"Warp2D": "",
 "WheelState": "",
 "WheelStateWeighed": ""
 }

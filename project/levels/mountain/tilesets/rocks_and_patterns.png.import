@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rocks_and_patterns.png-32f5373697ca6f33efc9c4a8644f0f81.stex"
+path="res://.import/rocks_and_patterns.png-6420e2a3f2a1656283d60977faecfe61.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/snow level parent/tilesets/rocks_and_patterns.png"
-dest_files=[ "res://.import/rocks_and_patterns.png-32f5373697ca6f33efc9c4a8644f0f81.stex" ]
+source_file="res://levels/mountain/tilesets/rocks_and_patterns.png"
+dest_files=[ "res://.import/rocks_and_patterns.png-6420e2a3f2a1656283d60977faecfe61.stex" ]
 
 [params]
 
