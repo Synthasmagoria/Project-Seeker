@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://global/math.gd"
 }, {
+"base": "State",
+"class": "MenuState",
+"language": "GDScript",
+"path": "res://ui/menu/states/menu_state.gd"
+}, {
 "base": "Node2D",
 "class": "NodeWheel",
 "language": "GDScript",
@@ -78,6 +83,7 @@ _global_script_class_icons={
 "EnemyState": "",
 "FollowCamera2D": "",
 "Math": "",
+"MenuState": "",
 "NodeWheel": "",
 "NodeWheelWeight": "",
 "PathCouplingPoint2D": "",
@@ -176,4 +182,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+environment/default_clear_color=Color( 0, 0, 0, 0 )
 environment/default_environment="res://default_env.tres"
