@@ -1,6 +1,7 @@
 extends EnemyState
 
-var duration = 2.0
+var duration = 0.25
+
 var observed = false
 
 func enter() -> void:

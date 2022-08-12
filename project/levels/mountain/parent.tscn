@@ -8,7 +8,6 @@
 [ext_resource path="res://levels/mountain/tilesets/rock_background_tileset.tres" type="TileSet" id=10]
 [ext_resource path="res://objects/solidmap/solids_32.tscn" type="PackedScene" id=11]
 
-
 [node name="Level" type="Node2D" groups=["levels"]]
 script = ExtResource( 6 )
 
@@ -22,12 +21,14 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="Rocks" type="TileMap" parent="."]
+z_index = 2
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 
 [node name="Snow" type="TileMap" parent="."]
+z_index = 2
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
