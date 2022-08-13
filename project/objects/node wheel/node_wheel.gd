@@ -20,6 +20,11 @@ func set_automatic_spacing(val : bool) -> void:
 	if automatic_spacing:
 		space_children_evenly()
 
+export(float, 0.0, 360.0) var angular_offset = 0.0 setget set_angular_offset
+func set_angular_offset(val : float) -> void:
+	angular_offset = val
+	space_children_evenly()
+
 export(float, 1.0, 320.0) var automatic_distance = 32.0 setget set_automatic_distance
 func set_automatic_distance(val : float) -> void:
 	automatic_distance = max(1.0, val)
@@ -42,7 +47,7 @@ func space_children_evenly() -> void:
 	var _child
 	for i in _child_count:
 		_child = _children[i]
-		_child.position = Vector2.UP.rotated(deg2rad(360.0 / _child_count * i)) * _child.position.length()
+		_child.position = Vector2.UP.rotated(deg2rad(360.0 / _child_count * i + angular_offset)) * _child.position.length()
 
 func init() -> void:
 	if !_initialized:

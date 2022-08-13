@@ -8,6 +8,8 @@ func set_area(val : Rect2) -> void:
 	area = val
 	update()
 
+export(Dictionary) var passed_values
+
 export(float, 0.1, 10.0) var interval = 1.0
 
 export(bool) var active_on_ready = true
@@ -47,8 +49,13 @@ func get_random_spawn_position() -> Vector2:
 			global_position.x + area.position.x + area.size.x * randf(),
 			global_position.y + area.position.y + area.size.y * randf())
 
+func pass_values_to_node(node : Node, values : Dictionary) -> void:
+	for key in values:
+		node.set(key, values[key])
+
 func spawn() -> void:
 	var _instance = scene.instance()
 	_instance.global_position = get_random_spawn_position()
+	pass_values_to_node(_instance, passed_values)
 	LevelManager.add_to_level(_instance)
 	set_interval_timer()

@@ -6,13 +6,17 @@ var player : Node2D
 
 var player_close : bool
 var player_far : bool
+var far_radius := -1.0 setget set_far_radius
+func set_far_radius(val : float) -> void:
+	far_radius = val
+	if far_radius > 0.0:
+		$PlayerDetector/Far.shape.radius = far_radius
 
 func _ready() -> void:
 	$StateMachine.init([self])
 
 func die() -> void:
 	queue_free()
-
 
 func _on_PlayerDetector_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):

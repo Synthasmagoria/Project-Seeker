@@ -4,7 +4,10 @@ var player
 onready var agent = $"../../NavigationAgent2D"
 export(float) var speed = 150.0
 export(float) var threshold = 4.0
+var timer : SceneTreeTimer
 var path : Array
+
+var refresh_interval = 0.95
 
 func connect_to_agent() -> void:
 	agent.connect("velocity_computed", self, "_on_velocity_computed")
@@ -14,6 +17,22 @@ func disconnect_from_agent() -> void:
 
 func enter() -> void:
 	connect_to_agent()
+
+func set_path_refresh_timer() -> void:
+	timer = get_tree().create_timer(refresh_interval)
+	timer.connect("timeout", self, "_on_refresh_timer_timeout")
+
+func unset_path_fresh_timer() -> void:
+	if is_instance_valid(timer):
+		timer.disconnect("timeout", self, "_on_refresh_timer_timeout")
+		timer = null
+
+func _on_refresh_timer_timeout() -> void:
+	update_path()
+	set_path_refresh_timer()
+
+func update_path() -> void:
+	path = get_path_to_player()
 
 func get_path_to_player() -> Array:
 	var _p = []
@@ -29,7 +48,7 @@ func get_path_to_player() -> Array:
 
 func physics_process(delta : float) -> String:
 	if path.empty():
-		path = get_path_to_player()
+		update_path()
 	
 	if !path.empty():
 		var _position = enemy.global_position
