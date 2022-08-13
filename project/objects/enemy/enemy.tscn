@@ -107,6 +107,7 @@ texture = ExtResource( 8 )
 position = Vector2( 0, -1 )
 frames = SubResource( 8 )
 animation = "move"
+frame = 1
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]

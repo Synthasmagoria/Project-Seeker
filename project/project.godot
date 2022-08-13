@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://objects/node wheel/node_wheel.gd"
 }, {
+"base": "Path2D",
+"class": "NodeWheelPath2D",
+"language": "GDScript",
+"path": "res://objects/node wheel/node_wheel_path.gd"
+}, {
 "base": "NodeWheel",
 "class": "NodeWheelWeight",
 "language": "GDScript",
@@ -102,6 +107,7 @@ _global_script_class_icons={
 "Math": "",
 "MenuState": "",
 "NodeWheel": "",
+"NodeWheelPath2D": "",
 "NodeWheelWeight": "",
 "PathCouplingPoint2D": "",
 "PathFollowDetector2D": "",

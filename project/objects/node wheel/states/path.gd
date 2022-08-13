@@ -1,7 +1,7 @@
 extends WheelStateWeighed
 
 ## The speed at which the wheel moves along its path
-export(float, 0.1, 5.0) var path_movement_speed = 0.6
+export(float, -5.0, 5.0) var path_movement_speed = 0.6
 ## The path to follow as the wheel rotates
 export(NodePath) var path_follow_path
 ## Whether the wheel should follow the path follow node or not
@@ -12,11 +12,6 @@ onready var _path_follow : PathFollow2D = get_node_or_null(path_follow_path)
 
 #
 var _detaching : bool
-
-## The action to perform when the end of a path has been reached
-enum PathEndResponse{SPIN, STOP, DETACH}
-export(PathEndResponse) var path_reached_beginning_response
-export(PathEndResponse) var path_reached_end_response
 
 func get_path_follow_direction(pf : PathFollow2D) -> Vector2:
 	var _curve = pf.get_parent().curve as Curve2D
@@ -87,17 +82,21 @@ func physics_process(delta : float) -> String:
 		
 		if _beginning_reached || _end_reached:
 			var _response
-			if _beginning_reached:
-				_response = path_reached_beginning_response
+			if _path_follow.get_parent() is NodeWheelPath2D:
+				var _nwp = _path_follow.get_parent() as NodeWheelPath2D
+				if _beginning_reached:
+					_response = _nwp.path_reached_beginning_response
+				else:
+					_response = _nwp.path_reached_end_response
 			else:
-				_response = path_reached_end_response
+				_response = NodeWheelPath2D.PathEndResponse.SPIN
 			
 			match _response:
-				PathEndResponse.SPIN:
+				NodeWheelPath2D.PathEndResponse.SPIN:
 					pass # do nothing
-				PathEndResponse.STOP:
+				NodeWheelPath2D.PathEndResponse.STOP:
 					_new_av = clamp_velocity_to_path_bounds(_path_follow, _vel)
-				PathEndResponse.DETACH:
+				NodeWheelPath2D.PathEndResponse.DETACH:
 					_detaching = true
 		
 		if !_coupled:
