@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://ui/menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://objects/solidmap/solid.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ui/menu/bg.png" type="Texture" id=8]
 [ext_resource path="res://ui/menu/scrolling_texture.tres" type="Shader" id=9]
 [ext_resource path="res://ui/menu/states/invisible.gd" type="Script" id=10]
+[ext_resource path="res://ui/menu/seeker_loop.wav" type="AudioStream" id=11]
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 9 )
@@ -187,6 +188,7 @@ default_state = "Menu"
 
 [node name="Menu" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
+menu_music = ExtResource( 11 )
 
 [node name="Transition" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
