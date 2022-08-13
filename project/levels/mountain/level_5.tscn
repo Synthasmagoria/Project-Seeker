@@ -145,7 +145,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
-level_scene_path = "res://levels/mountain/level_4.tscn"
+level_scene_path = "res://levels/mountain/level_6.tscn"
 
 [node name="Hitbox" type="CollisionShape2D" parent="WarpUp" index="0"]
 shape = SubResource( 4 )

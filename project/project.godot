@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://objects/player/states/player_state.gd"
 }, {
+"base": "Area2D",
+"class": "Popup2D",
+"language": "GDScript",
+"path": "res://objects/popup.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -112,6 +117,7 @@ _global_script_class_icons={
 "PathCouplingPoint2D": "",
 "PathFollowDetector2D": "",
 "PlayerState": "",
+"Popup2D": "",
 "State": "",
 "StateMachine": "",
 "Util": "",
