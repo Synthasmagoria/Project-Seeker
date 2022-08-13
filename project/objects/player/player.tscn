@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://objects/player/hitshape.tres" type="Shape2D" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://objects/player/states/airborne.gd" type="Script" id=6]
 [ext_resource path="res://objects/player/states/down_dash.gd" type="Script" id=7]
 [ext_resource path="res://objects/player/spell/spell.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/player/player.png" type="Texture" id=9]
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
@@ -44,5 +45,8 @@ script = ExtResource( 3 )
 
 [node name="DownDash" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 9 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_Player_tree_exiting"]
