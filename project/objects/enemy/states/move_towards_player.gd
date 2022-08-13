@@ -2,6 +2,7 @@ extends EnemyState
 
 var player
 onready var agent = $"../../NavigationAgent2D"
+onready var sprite = $"../../AnimatedSprite"
 export(float) var speed = 150.0
 export(float) var threshold = 4.0
 var timer : SceneTreeTimer
@@ -17,6 +18,7 @@ func disconnect_from_agent() -> void:
 
 func enter() -> void:
 	connect_to_agent()
+	sprite.play("move")
 
 func set_path_refresh_timer() -> void:
 	timer = get_tree().create_timer(refresh_interval)
@@ -32,7 +34,10 @@ func _on_refresh_timer_timeout() -> void:
 	set_path_refresh_timer()
 
 func update_path() -> void:
+	print("updated")
 	path = get_path_to_player()
+	if path.size() > 0:
+		agent.set_target_location(path[0])
 
 func get_path_to_player() -> Array:
 	var _p = []
@@ -70,4 +75,6 @@ func exit() -> void:
 	disconnect_from_agent()
 
 func _on_velocity_computed(safe_velocity : Vector2) -> void:
+	var _position = enemy.position
 	enemy.move_and_slide(safe_velocity)
+	sprite.flip_h = (enemy.position.x - _position.x) == -1.0

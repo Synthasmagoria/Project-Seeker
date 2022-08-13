@@ -14,6 +14,10 @@ export(float, 0.1, 10.0) var interval = 1.0
 
 export(bool) var active_on_ready = true
 
+export(int) var spawn_limit = -1
+
+export(String) var spawn_limit_group = "enemies"
+
 var active : bool setget set_active
 func set_active(val : bool) -> void:
 	if val == active:
@@ -54,6 +58,9 @@ func pass_values_to_node(node : Node, values : Dictionary) -> void:
 		node.set(key, values[key])
 
 func spawn() -> void:
+	if spawn_limit > 0 && get_tree().get_nodes_in_group(spawn_limit_group).size() > spawn_limit:
+		return
+	
 	var _instance = scene.instance()
 	_instance.global_position = get_random_spawn_position()
 	pass_values_to_node(_instance, passed_values)

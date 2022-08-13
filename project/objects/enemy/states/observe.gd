@@ -1,10 +1,13 @@
 extends EnemyState
 
 var duration = 0.25
-
+onready var sprite = $"../../AnimatedSprite"
 var observed = false
 
 func enter() -> void:
+	sprite.stop()
+	sprite.animation = "idle"
+	sprite.frame = 0
 	observe()
 
 func observe() -> void:

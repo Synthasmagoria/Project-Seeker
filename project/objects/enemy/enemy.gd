@@ -3,9 +3,9 @@ extends KinematicBody2D
 enum PlayerDetectionShapes{CLOSE, FAR}
 
 var player : Node2D
-
 var player_close : bool
 var player_far : bool
+
 var far_radius := -1.0 setget set_far_radius
 func set_far_radius(val : float) -> void:
 	far_radius = val
