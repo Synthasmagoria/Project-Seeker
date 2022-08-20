@@ -1,4 +1,4 @@
-extends KinematicBody2D
+	extends KinematicBody2D
 
 enum PlayerDetectionShapes{CLOSE, FAR}
 

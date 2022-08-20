@@ -10,17 +10,16 @@ uniform float duration;
 uniform float frame_width;
 uniform float start_x = 0;
 
-vec2 floor_to(vec2 v, float val)
-{
-	return floor(v / val) * val;
-}
-
 void fragment()
 {
 	float frame = floor(mod(TIME, count * duration) / duration);
 	float offset = floor((UV.x - start_x) / frame_width);
 	vec2 anim_coord = vec2((mod(offset + frame, count) - offset) * frame_width, 0);
+	
 	anim_coord = ceil(anim_coord / TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE;
+	
 	COLOR = texture(frames, UV + anim_coord);
 }
+
+
 "

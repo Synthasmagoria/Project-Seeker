@@ -1,4 +1,4 @@
-extends KinematicBody2D
+	extends KinematicBody2D
 
 # TODO: Move state specific variables into their respective classes
 ## The speed at which the player walks
