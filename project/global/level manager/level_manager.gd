@@ -7,7 +7,7 @@ var _level : Node
 
 const LEVEL_GROUP_NAME = "levels"
 
-signal level_changed
+signal level_changed(from, to)
 
 ## Loads a level using a packed scene and sets
 func change(level : PackedScene) -> void:
@@ -29,8 +29,6 @@ func clear() -> void:
 	if _level:
 		_level.queue_free()
 		_level = null
-#	for n in $Caducous.get_children():
-#		n.queue_free()
 
 ## Removes all instances, including persistent ones
 func reset() -> void:
@@ -67,9 +65,17 @@ func is_persistent(node : Node) -> bool:
 func _ready() -> void:
 	# When play scene is called on a level this will make sure that
 	# it gets added as child of the level manager
+	set_particle_manager_target()
 	_add_first_in_group()
 #	if is_level_loaded():
 #		Game.state = Game.STATE.IN_GAME
+
+# Sets the particle manager's target to the current room if it exists
+func set_particle_manager_target() -> void:
+	connect("level_changed", self, "_update_particle_manager_target")
+
+func _update_particle_manager_target(from, to) -> void:
+	ParticleManager.target = to
 
 # Adds first level from a group as child of the level manager
 func _add_first_in_group() -> void:
@@ -91,8 +97,9 @@ func _set_level(level : Node) -> void:
 		return
 #	if _level_parent:
 #		_level_parent.call_deferred("remove_child", level)
+	var _prev_level = _level
 	_level = level
 	current_level_path = level.filename
-	emit_signal("level_changed")
+	emit_signal("level_changed", _prev_level, _level)
 	if !_level_parent:
 		$Caducous.call_deferred("add_child", level)

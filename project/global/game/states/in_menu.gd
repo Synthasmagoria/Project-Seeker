@@ -28,5 +28,5 @@ func _on_menu_start_game() -> void:
 	else:
 		Game.new_game()
 
-func _on_level_changed() -> void:
+func _on_level_changed(from, to) -> void:
 	pass_state = "InGame"

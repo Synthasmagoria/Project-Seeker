@@ -145,6 +145,7 @@ LevelManager="*res://global/level manager/level_manager.tscn"
 Save="*res://global/save.gd"
 Game="*res://global/game/game.tscn"
 SoundManager="*res://global/sound manager/sound_manager.tscn"
+ParticleManager="*res://global/particle_manager.gd"
 
 [debug]
 
