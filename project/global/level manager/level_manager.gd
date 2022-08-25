@@ -63,12 +63,10 @@ func is_persistent(node : Node) -> bool:
 	return $Persistent.is_a_parent_of(node)
 
 func _ready() -> void:
+	set_particle_manager_target()
 	# When play scene is called on a level this will make sure that
 	# it gets added as child of the level manager
-	set_particle_manager_target()
 	_add_first_in_group()
-#	if is_level_loaded():
-#		Game.state = Game.STATE.IN_GAME
 
 # Sets the particle manager's target to the current room if it exists
 func set_particle_manager_target() -> void:
