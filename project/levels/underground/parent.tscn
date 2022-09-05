@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://levels/underground/tilesets/rocks.tres" type="TileSet" id=1]
+[ext_resource path="res://levels/underground/tilesets/rocks_bg.tres" type="TileSet" id=2]
+[ext_resource path="res://objects/solidmap/solids_32.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/level.gd" type="Script" id=4]
+
+[node name="Level" type="Node2D" groups=["levels"]]
+script = ExtResource( 4 )
+
+[node name="Rocks" type="TileMap" parent="."]
+z_index = 2
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+
+[node name="RocksBg" type="TileMap" parent="."]
+z_index = -2
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+
+[node name="Solids" parent="." instance=ExtResource( 3 )]

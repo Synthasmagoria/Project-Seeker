@@ -10,7 +10,6 @@
 [ext_resource path="res://objects/snow visuals/snow.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/player/player start/player_start.tscn" type="PackedScene" id=9]
 
-
 [node name="Level" type="Node2D" groups=["levels"]]
 script = ExtResource( 1 )
 
