@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://objects/curse/level.png" type="Texture" id=1]
+[ext_resource path="res://objects/curse/curse.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/curse/curse.gdshader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/fill_color = Color( 0, 0, 0, 0.501961 )
+shader_param/edge_color = Color( 1, 0, 0, 1 )
+shader_param/edge_threshold = 0.5
+shader_param/inside_edge_color = Color( 0.75, 0, 0, 1 )
+shader_param/inside_edge_threshold = 0.2
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1024, 608 )
+transparent_bg = true
+hdr = false
+usage = 0
+render_target_v_flip = true
+
+[node name="Curse" parent="Viewport" instance=ExtResource( 2 )]
+position = Vector2( 400, 304 )
+
+[node name="Level" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Curse" type="Sprite" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 2 )
+texture = SubResource( 1 )
+centered = false

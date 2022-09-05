@@ -7,7 +7,7 @@
 [ext_resource path="res://objects/enemy/states/wind_up.gd" type="Script" id=5]
 [ext_resource path="res://objects/enemy/states/observe.gd" type="Script" id=6]
 [ext_resource path="res://objects/enemy/enemy.png" type="Texture" id=7]
-[ext_resource path="res://objects/enemy/smoke.png" type="Texture" id=8]
+[ext_resource path="res://reusables/smoke.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 48.0

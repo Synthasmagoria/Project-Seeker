@@ -9,6 +9,26 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite",
+"class": "CurseArea2D",
+"language": "GDScript",
+"path": "res://objects/curse/area.gd"
+}, {
+"base": "Node",
+"class": "CurseUtil",
+"language": "GDScript",
+"path": "res://objects/curse/curse_util.gd"
+}, {
+"base": "Sprite",
+"class": "CurseVisualizer2D",
+"language": "GDScript",
+"path": "res://objects/curse/visualizer.gd"
+}, {
+"base": "Viewport",
+"class": "Curseport",
+"language": "GDScript",
+"path": "res://objects/curse/curseport.gd"
+}, {
 "base": "State",
 "class": "EnemyState",
 "language": "GDScript",
@@ -115,6 +135,10 @@ _global_script_classes=[ {
 "path": "res://objects/node wheel/states/weighed.gd"
 } ]
 _global_script_class_icons={
+"CurseArea2D": "",
+"CurseUtil": "",
+"CurseVisualizer2D": "",
+"Curseport": "",
 "EnemyState": "",
 "Follow2D": "",
 "FollowCamera2D": "",
