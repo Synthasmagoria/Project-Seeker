@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://levels/mountain/parent.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/platform/platform.tscn" type="PackedScene" id=2]
-[ext_resource path="res://objects/spawner/spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/checkpoint/checkpoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/node wheel/node_wheel_state.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/warp.gd" type="Script" id=6]
@@ -44,17 +43,10 @@ tile_data = PoolIntArray( 852026, 0, 0, 852027, 0, 0, 983058, 0, 0, 983059, 0, 0
 [node name="Platform" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 272, 584 )
 
-[node name="Spawner" parent="." index="7" instance=ExtResource( 3 )]
-position = Vector2( -144, 208 )
-passed_values = {
-"far_radius": 2000.0
-}
-interval = 2.0
-
-[node name="Checkpoint" parent="." index="8" instance=ExtResource( 4 )]
+[node name="Checkpoint" parent="." index="7" instance=ExtResource( 4 )]
 position = Vector2( 320, 480 )
 
-[node name="NodeWheelState" parent="." index="9" instance=ExtResource( 5 )]
+[node name="NodeWheelState" parent="." index="8" instance=ExtResource( 5 )]
 position = Vector2( 472, 456 )
 automatic_distance = 56.0
 
@@ -76,7 +68,7 @@ position = Vector2( -32.916, 45.305 )
 [node name="Platform5" parent="NodeWheelState" index="5" instance=ExtResource( 2 )]
 position = Vector2( -53.2592, -17.305 )
 
-[node name="NodeWheelState2" parent="." index="10" instance=ExtResource( 5 )]
+[node name="NodeWheelState2" parent="." index="9" instance=ExtResource( 5 )]
 position = Vector2( 792, 152 )
 automatic_distance = 56.0
 
@@ -99,7 +91,7 @@ position = Vector2( -32.916, 45.305 )
 [node name="Platform5" parent="NodeWheelState2" index="5" instance=ExtResource( 2 )]
 position = Vector2( -53.2592, -17.305 )
 
-[node name="PathBottom" type="Path2D" parent="." index="11"]
+[node name="PathBottom" type="Path2D" parent="." index="10"]
 curve = SubResource( 1 )
 script = ExtResource( 8 )
 
@@ -111,7 +103,7 @@ cubic_interp = false
 loop = false
 script = ExtResource( 7 )
 
-[node name="PathTop" type="Path2D" parent="." index="12"]
+[node name="PathTop" type="Path2D" parent="." index="11"]
 curve = SubResource( 3 )
 script = ExtResource( 8 )
 path_reached_end_response = 2
@@ -124,7 +116,7 @@ cubic_interp = false
 loop = false
 script = ExtResource( 7 )
 
-[node name="WarpDown" type="Area2D" parent="." index="13"]
+[node name="WarpDown" type="Area2D" parent="." index="12"]
 position = Vector2( 272, 624 )
 collision_layer = 0
 collision_mask = 2
@@ -141,7 +133,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="WarpUp" type="Area2D" parent="." index="14"]
+[node name="WarpUp" type="Area2D" parent="." index="13"]
 position = Vector2( 352, -16 )
 collision_layer = 0
 collision_mask = 2
@@ -158,7 +150,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerStart" parent="." index="15" instance=ExtResource( 9 )]
+[node name="PlayerStart" parent="." index="14" instance=ExtResource( 9 )]
 position = Vector2( 272, 536 )
 
 [editable path="NodeWheelState"]

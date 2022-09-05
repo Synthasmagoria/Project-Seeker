@@ -14,10 +14,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://objects/enemy/states/enemy_state.gd"
 }, {
+"base": "Node2D",
+"class": "Follow2D",
+"language": "GDScript",
+"path": "res://reusables/follow_2d.gd"
+}, {
 "base": "Camera2D",
 "class": "FollowCamera2D",
 "language": "GDScript",
-"path": "res://objects/follow camera/follow_camera.gd"
+"path": "res://objects/follow_camera.gd"
 }, {
 "base": "State",
 "class": "GameState",
@@ -111,6 +116,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "EnemyState": "",
+"Follow2D": "",
 "FollowCamera2D": "",
 "GameState": "",
 "Level2D": "",

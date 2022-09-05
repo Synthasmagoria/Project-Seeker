@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://levels/underground/tilesets/rocks.tres" type="TileSet" id=1]
 [ext_resource path="res://levels/underground/tilesets/rocks_bg.tres" type="TileSet" id=2]
@@ -6,27 +6,66 @@
 [ext_resource path="res://objects/level.gd" type="Script" id=4]
 [ext_resource path="res://objects/spike/spike_purple.tres" type="TileSet" id=5]
 [ext_resource path="res://objects/spike/spike.tscn" type="PackedScene" id=6]
+[ext_resource path="res://reusables/white_square.png" type="Texture" id=7]
+[ext_resource path="res://reusables/follow_2d.gd" type="Script" id=8]
+[ext_resource path="res://reusables/visibility_on_ready.gd" type="Script" id=9]
+[ext_resource path="res://objects/follow_camera.gd" type="Script" id=10]
+[ext_resource path="res://reusables/flashlight.png" type="Texture" id=11]
 
 [node name="Level" type="Node2D" groups=["levels"]]
 script = ExtResource( 4 )
 
-[node name="Rocks" type="TileMap" parent="."]
-z_index = 2
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 32, 32 )
-cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
-format = 1
+[node name="Solids" parent="." instance=ExtResource( 3 )]
+z_index = 3
 
-[node name="RocksBg" type="TileMap" parent="."]
+[node name="Background" type="Node2D" parent="."]
 z_index = -2
+
+[node name="RocksBg" type="TileMap" parent="Background"]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 
-[node name="Solids" parent="." instance=ExtResource( 3 )]
-z_index = 3
+[node name="Middle" type="Node2D" parent="."]
 
-[node name="Spikes" parent="." instance=ExtResource( 6 )]
+[node name="Rocks" type="TileMap" parent="Middle"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+
+[node name="Spikes" parent="Middle" instance=ExtResource( 6 )]
 tile_set = ExtResource( 5 )
 tile_data = PoolIntArray(  )
+
+[node name="Foreground" type="Node2D" parent="."]
+z_index = 2
+
+[node name="VisibleOnReady" type="Node2D" parent="Foreground"]
+script = ExtResource( 8 )
+on_ready = true
+follow_group = "camera"
+
+[node name="Dim" type="Sprite" parent="Foreground/VisibleOnReady"]
+visible = false
+modulate = Color( 0, 0, 0, 0.694118 )
+scale = Vector2( 32, 19 )
+texture = ExtResource( 7 )
+centered = false
+script = ExtResource( 9 )
+visibility_on_ready = true
+
+[node name="PlayerLight" type="Light2D" parent="Foreground"]
+position = Vector2( -240, -176 )
+scale = Vector2( 4, 4 )
+z_index = 3
+texture = ExtResource( 11 )
+energy = 1.5
+script = ExtResource( 8 )
+on_ready = true
+follow_group = "player"
+
+[node name="FollowCamera" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 10 )
