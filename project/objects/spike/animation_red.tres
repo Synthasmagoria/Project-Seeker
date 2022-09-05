@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
 [ext_resource path="res://reusables/animated_tile_pixel_ceil.tres" type="Shader" id=1]
-[ext_resource path="res://objects/spike/spike.png" type="Texture" id=2]
+[ext_resource path="res://objects/spike/spike_red.png" type="Texture" id=2]
 
 [resource]
 shader = ExtResource( 1 )
