@@ -29,7 +29,9 @@ func physics_process(delta : float) -> String:
 	
 	player.refresh_airjumps()
 	
-	if player.get_enemy_collision() || player.get_killer_collision():
+	if $"%InteractableDetector".get_overlapping_areas().size() > 0 && Input.is_action_just_pressed("up"):
+		return "Hiding"
+	elif player.get_enemy_collision() || player.get_killer_collision():
 		return "Dead"
 	elif player.is_on_floor():
 		return KEEP_STATE
