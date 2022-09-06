@@ -16,3 +16,6 @@ static func int_set_bit(i : int, bit : int, val : bool) -> int:
 
 static func int_get_bit(i : int, bit : int) -> bool:
 	return bool(i >> bit & 1)
+
+static func fract(val : float) -> float:
+	return abs(val) - floor(abs(val))
