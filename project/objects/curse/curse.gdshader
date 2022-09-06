@@ -14,7 +14,7 @@ float detect_edge(sampler2D tex, vec2 uv, vec2 px_size, float thresh)
 		distance(down.rgb, sample.rgb));
 }
 
-uniform vec4 fill_color : hint_color = vec4(0.0, 0.0, 0.0, 0.5);
+uniform vec4 fill_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform vec4 edge_color : hint_color = vec4(1.0, 0.0, 0.0, 1.0);
 uniform float edge_threshold : hint_range(0.0, 4.0) = 0.5;
 uniform vec4 inside_edge_color : hint_color = vec4(0.75, 0.0, 0.0, 1.0);
