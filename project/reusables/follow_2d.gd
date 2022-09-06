@@ -22,7 +22,7 @@ func stop() -> void:
 func follow(group : String) -> void:
 	stop()
 	follow_group = group
-	_target = NodeUtil.get_first_node_in_group(follow_group)
+	_target = NodeUtil.get_first_valid_node_in_group(follow_group)
 	if is_instance_valid(_target):
 		Util.connect_safe(_target, "tree_exiting", self, "_on_target_tree_exiting")
 		set_process(true)

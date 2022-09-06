@@ -49,7 +49,7 @@ follow_group = "camera"
 
 [node name="Dim" type="Sprite" parent="Foreground/VisibleOnReady"]
 visible = false
-modulate = Color( 0, 0, 0, 0.694118 )
+modulate = Color( 0, 0, 0, 0.501961 )
 scale = Vector2( 32, 19 )
 texture = ExtResource( 7 )
 centered = false

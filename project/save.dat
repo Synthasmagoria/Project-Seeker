@@ -1,4 +1,4 @@
 {
-"level_path": "res://levels/mountain/level_1.tscn",
-"position": Vector2( 352, 624 )
+"level_path": "res://levels/underground/level_1.tscn",
+"position": Vector2( 32, 352 )
 }

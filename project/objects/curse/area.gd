@@ -11,6 +11,7 @@ func _ready() -> void:
 	modulate = Color.from_hsv(0.35, 0.5, 1.0, 0.5)
 	
 	if !Engine.editor_hint:
+		visible = false
 		CurseUtil.get_curseport(self).add_child(create_curse_particles(global_position, texture.get_size() * scale / 2.0))
 
 static func create_curse_particles(pos : Vector2, size : Vector2) -> Particles2D:
