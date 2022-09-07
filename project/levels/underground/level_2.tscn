@@ -89,6 +89,7 @@ tile_data = PoolIntArray( 524317, 3, 0, 589831, 3, 0, 720913, 0, 0, 720914, 1, 0
 modulate = Color( 0, 0, 0, 0 )
 
 [node name="CurseArea" parent="Foreground" index="2" instance=ExtResource( 11 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 832, 96 )
 
 [node name="CurseSpawner" parent="Foreground" index="3" instance=ExtResource( 12 )]

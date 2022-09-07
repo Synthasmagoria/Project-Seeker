@@ -7,6 +7,12 @@ var player : KinematicBody2D
 func init(body : KinematicBody2D) -> void:
 	player = body
 
+static func get_bottom(shape : CollisionShape2D) -> Vector2:
+	return shape.global_position + shape.shape.extents
+
+static func get_wand_facing_down(player : KinematicBody2D, shape : CollisionShape2D) -> Vector2:
+	return Vector2(player.global_position.x, get_bottom(shape).y + 4.0)
+
 static func recharge_boost(player : KinematicBody2D) -> void:
 	player.boosted = false
 

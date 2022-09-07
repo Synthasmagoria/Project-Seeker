@@ -20,6 +20,9 @@ func burst_particles(scn : PackedScene, pos : Vector2, dur : float = 0.0, lt : f
 	_inst.emitting = true
 	if lt > 0.0:
 		_inst.lifetime = lt
+	print(_inst.lifetime)
+	print(_inst.lifetime - get_physics_process_delta_time() + dur)
+	print(dur)
 	get_tree().create_timer(_inst.lifetime - get_physics_process_delta_time() + dur).connect("timeout", self, "_burst_timeout", [_inst])
 	if dur > 0.0:
 		get_tree().create_timer(dur).connect("timeout", self, "_burst_duration_timeout", [_inst])

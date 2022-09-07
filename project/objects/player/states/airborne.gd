@@ -20,9 +20,6 @@ func exit() -> void:
 static func limit_fall_velocity(vel : Vector2, limit : float) -> Vector2:
 	return Vector2(vel.x, min(vel.y, limit))
 
-static func get_bottom(shape : CollisionShape2D) -> Vector2:
-	return shape.global_position + shape.shape.extents
-
 static func get_top(shape : CollisionShape2D) -> Vector2:
 	return shape.global_position - shape.shape.extents
 

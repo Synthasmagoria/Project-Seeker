@@ -15,17 +15,14 @@ var particles : Particles2D
 ##
 var walk_velocity_multiplier := 0.25
 
-static func get_wand_position(player : KinematicBody2D, hitshape : CollisionShape2D) -> Vector2:
-	return Vector2(player.global_position.x, get_bottom(hitshape).y + 4.0)
-
 func enter() -> void:
 	player.modulate = Color.coral
 	duration = 0.0
-	particles = ParticleManager.spawn_particles(CHARGING_PARTICLES_SCENE, get_wand_position(player, $"%KinematicHitshape"))
+	particles = ParticleManager.spawn_particles(CHARGING_PARTICLES_SCENE, get_wand_facing_down(player, $"%KinematicHitshape"))
 
 func physics_process(delta : float) -> String:
 	# Align charging particles with wand
-	particles.global_position = get_wand_position(player, $"%KinematicHitshape")
+	particles.global_position = get_wand_facing_down(player, $"%KinematicHitshape")
 	
 	# Prevent the player from moving horizontally
 	player.velocity.x = get_walk_velocity() * walk_velocity_multiplier
