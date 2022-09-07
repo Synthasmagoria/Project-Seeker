@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/player/player start/player_start.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/solidmap/solids_32.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/level.gd" type="Script" id=3]
+[ext_resource path="res://objects/enemy/enemy.tscn" type="PackedScene" id=4]
 
 [node name="Level" type="Node2D" groups=["levels"]]
 script = ExtResource( 3 )
@@ -14,3 +15,6 @@ visibility_on_ready = true
 [node name="PlayerStart" parent="." instance=ExtResource( 1 )]
 position = Vector2( 288, 192 )
 save_on_create = true
+
+[node name="Enemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 134, 144 )

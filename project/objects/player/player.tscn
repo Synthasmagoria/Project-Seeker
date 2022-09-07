@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://objects/player/hitshape.tres" type="Shape2D" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://objects/player/spell/spell.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/player/player.png" type="Texture" id=9]
 [ext_resource path="res://objects/player/states/hiding.gd" type="Script" id=10]
+[ext_resource path="res://objects/player/states/charging_boost.gd" type="Script" id=11]
+[ext_resource path="res://objects/player/states/boost.gd" type="Script" id=12]
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
@@ -57,6 +59,12 @@ script = ExtResource( 7 )
 
 [node name="Hiding" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
+
+[node name="ChargingBoost" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+
+[node name="Boost" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 9 )

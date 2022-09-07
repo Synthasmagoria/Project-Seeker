@@ -1,5 +1,7 @@
 extends PlayerState
 
+class_name PlayerStateAirborne
+
 var airjump_strength := 300.0
 var jump_dampen := 0.45
 var fall_speed_max := 490.0
@@ -92,7 +94,10 @@ func physics_process(delta : float) -> String:
 	if player.is_on_floor() && !_enemy_col:
 		return POP_STATE
 	
-	if Input.is_action_pressed("down") && Input.is_action_pressed("jump"):
+	if Input.is_action_pressed("up") && !player.boosted:
+		return "ChargingBoost"
+	
+	if Input.is_action_pressed("jump") && Input.is_action_pressed("down"):
 		return "DownDash"
 	
 	return KEEP_STATE

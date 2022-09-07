@@ -34,7 +34,6 @@ func _on_refresh_timer_timeout() -> void:
 	set_path_refresh_timer()
 
 func update_path() -> void:
-	print("updated")
 	path = get_path_to_player()
 	if path.size() > 0:
 		agent.set_target_location(path[0])

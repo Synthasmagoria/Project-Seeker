@@ -37,6 +37,8 @@ var airjump_count := 0
 var airjump_number := 1
 ##
 var dead = false
+##
+var boosted = false
 
 ## The state machine dictating player behavior
 onready var state_machine := $StateMachine
