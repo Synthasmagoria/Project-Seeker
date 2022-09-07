@@ -17,6 +17,7 @@ func spawn_particles(scn : PackedScene, pos : Vector2) -> Particles2D:
 ## Instance a particles scene at a position and destroy after lifetime duration
 func burst_particles(scn : PackedScene, pos : Vector2, dur : float = 0.0, lt : float = 0.0) -> Particles2D:
 	var _inst = spawn_particles(scn, pos)
+	_inst.emitting = true
 	if lt > 0.0:
 		_inst.lifetime = lt
 	get_tree().create_timer(_inst.lifetime - get_physics_process_delta_time() + dur).connect("timeout", self, "_burst_timeout", [_inst])

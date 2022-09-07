@@ -8,6 +8,7 @@ var fall_speed_max := 490.0
 var platform_detector : Area2D
 var previous_frame_platform : KinematicBody2D
 var enemy_bounce := 450.0
+const AIRJUMP_PARTICLES = preload("res://objects/player/particles/airjump.tscn")
 
 func init(args) -> void:
 	.init(args)
@@ -53,6 +54,10 @@ func physics_process(delta : float) -> String:
 	if Input.is_action_just_pressed("jump") && player.can_airjump():
 		player.velocity.y = -airjump_strength
 		player.count_airjump()
+		ParticleManager.burst_particles(
+				AIRJUMP_PARTICLES,
+				Vector2(player.global_position.x, get_bottom($"%KinematicHitshape").y),
+				2.0)
 	
 	# Soften the jump arc when jump is released
 	if Input.is_action_just_released("jump") && player.velocity.y <= 0.0:

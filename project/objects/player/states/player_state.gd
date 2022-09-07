@@ -7,7 +7,7 @@ var player : KinematicBody2D
 func init(body : KinematicBody2D) -> void:
 	player = body
 
-func recharge_boost(player : KinematicBody2D) -> void:
+static func recharge_boost(player : KinematicBody2D) -> void:
 	player.boosted = false
 
 func get_walk_velocity() -> float:

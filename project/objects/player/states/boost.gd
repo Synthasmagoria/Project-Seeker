@@ -16,4 +16,8 @@ func physics_process(delta : float) -> String:
 	player.velocity.y = -boost_strength
 	player.velocity.x = get_walk_velocity() * 2.0
 	player.velocity_movement(player.velocity, false)
+	
+	if player.is_on_ceiling():
+		return POP_STATE
+	
 	return next_state

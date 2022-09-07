@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/player/particles/charging.tres" type="Material" id=1]
+
+[node name="ChargingParticles" type="Particles2D"]
+amount = 128
+lifetime = 0.5
+speed_scale = 2.0
+process_material = ExtResource( 1 )

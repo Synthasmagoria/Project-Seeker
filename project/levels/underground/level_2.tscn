@@ -11,7 +11,7 @@
 [ext_resource path="res://levels/mountain/tilesets/rock_background_tileset.tres" type="TileSet" id=9]
 [ext_resource path="res://objects/hiding spot/hiding_spot.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/curse/area.tscn" type="PackedScene" id=11]
-[ext_resource path="res://objects/spawner/spawner.gd" type="Script" id=12]
+[ext_resource path="res://objects/spawner/curse_spawner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://objects/curse/visualizer.gd" type="Script" id=13]
 
 [node name="Level" instance=ExtResource( 6 )]
@@ -88,19 +88,16 @@ tile_data = PoolIntArray( 524317, 3, 0, 589831, 3, 0, 720913, 0, 0, 720914, 1, 0
 [node name="Dim" parent="Foreground/VisibleOnReady" index="0"]
 modulate = Color( 0, 0, 0, 0 )
 
-[node name="Spawner2D" type="Node2D" parent="Foreground" index="2"]
+[node name="CurseArea" parent="Foreground" index="2" instance=ExtResource( 11 )]
+position = Vector2( 832, 96 )
+
+[node name="CurseSpawner" parent="Foreground" index="3" instance=ExtResource( 12 )]
 modulate = Color( 0.498039, 1, 0.831373, 0.5 )
-position = Vector2( 592, 376 )
-script = ExtResource( 12 )
-scene = ExtResource( 11 )
 passed_values = {
 "default_state": "Spawn",
-"extents": Vector2( 600, 40 )
+"extents": Vector2( 600, 40 ),
+"timeout_duration": 12.0
 }
-interval = 10.0
-interval_offset = 0.354
-
-[node name="CurseArea" parent="Foreground" index="3" instance=ExtResource( 11 )]
 
 [node name="PlayerStart" parent="." index="5" instance=ExtResource( 5 )]
 position = Vector2( 672, 352 )

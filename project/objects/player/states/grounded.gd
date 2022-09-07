@@ -3,7 +3,7 @@ extends PlayerState
 var jump_strength := 400.0
 
 func enter() -> void:
-	pass
+	player.boosted = false
 
 func exit() -> void:
 	pass
