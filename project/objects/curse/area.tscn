@@ -1,14 +1,30 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/curse/area.gd" type="Script" id=1]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 600, 40 )
+[ext_resource path="res://base/state machine/state_machine.gd" type="Script" id=2]
+[ext_resource path="res://objects/curse/states/spawn.gd" type="Script" id=3]
+[ext_resource path="res://objects/curse/states/flow.gd" type="Script" id=4]
+[ext_resource path="res://objects/curse/states/static.gd" type="Script" id=5]
 
 [node name="CurseArea" type="KinematicBody2D"]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 collision_layer = 8
 collision_mask = 0
 script = ExtResource( 1 )
+extents = Vector2( 64, 32 )
 
 [node name="Area" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+default_state = "Spawn"
+process_mode = 2
+
+[node name="Spawn" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Flow" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Static" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )

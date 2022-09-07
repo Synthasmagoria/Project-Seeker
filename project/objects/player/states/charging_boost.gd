@@ -42,8 +42,6 @@ func physics_process(delta : float) -> String:
 		return "Boost"
 	else:
 		return POP_STATE
-	
-	return KEEP_STATE
 
 func exit() -> void:
 	player.modulate = Color.white
