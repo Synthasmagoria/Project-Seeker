@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 ## Path pointing to the resource of the currently loaded level
 var current_level_path : String
