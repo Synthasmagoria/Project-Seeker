@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://objects/player/player.gd" type="Script" id=1]
 [ext_resource path="res://objects/player/hitshape.tres" type="Shape2D" id=2]
@@ -13,6 +13,26 @@
 [ext_resource path="res://objects/player/states/charging_boost.gd" type="Script" id=11]
 [ext_resource path="res://objects/player/states/boost.gd" type="Script" id=12]
 [ext_resource path="res://objects/player/img/staff.png" type="Texture" id=13]
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 10
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 3.67
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 3 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
@@ -33,6 +53,14 @@ offset = Vector2( 0, -2 )
 [node name="KinematicHitshape" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
 shape = ExtResource( 2 )
+
+[node name="AfterimageParticles" type="Particles2D" parent="."]
+material = SubResource( 4 )
+amount = 4
+lifetime = 0.3
+local_coords = false
+process_material = SubResource( 1 )
+texture = ExtResource( 9 )
 
 [node name="InteractableDetector" type="Area2D" parent="."]
 unique_name_in_owner = true

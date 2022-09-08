@@ -5,10 +5,15 @@ class_name Level2D
 
 export(AudioStream) var music
 
+const LEVEL_GROUP = "levels"
+
 export(Vector2) var size = Vector2(1024.0, 608.0) setget set_size
 func set_size(val : Vector2) -> void:
 	size = val
 	update()
+
+func _init() -> void:
+	add_to_group(LEVEL_GROUP)
 
 func _ready() -> void:
 	SoundManager.play_music(music)

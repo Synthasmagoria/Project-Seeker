@@ -10,7 +10,7 @@ var particles : Particles2D
 
 func enter() -> void:
 	next_state = KEEP_STATE
-	var _dur = clamp(player.state_machine.get_state_by_name("ChargingBoost").duration, 0.0, boost_duration_max)
+	var _dur = clamp(player.state_machine.get_state_by_name("ChargingBoost").duration * 0.5, 0.0, boost_duration_max)
 	get_tree().create_timer(_dur).connect("timeout", self, "_timeout")
 	particles = ParticleManager.burst_particles(BOOST_PARTICLES_SCENE, get_wand_facing_down(player, $"%KinematicHitshape"), _dur)
 

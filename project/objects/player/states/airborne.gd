@@ -8,11 +8,15 @@ var fall_speed_max := 490.0
 var platform_detector : Area2D
 var previous_frame_platform : KinematicBody2D
 var enemy_bounce := 450.0
+var afterimage_threshold := 500.0
+var afterimage_particles : Particles2D
+var afterimage_stop_threshold := 100.0
 const AIRJUMP_PARTICLES = preload("res://objects/player/particles/airjump.tscn")
 
 func init(args) -> void:
 	.init(args)
 	platform_detector = player.get_node("PlatformDetector") as Area2D
+	afterimage_particles = player.get_node("AfterimageParticles") as Particles2D
 
 func exit() -> void:
 	pass
@@ -30,6 +34,12 @@ static func dampen_jump_velocity(vel : float, damp : float) -> float:
 	var _dampen = vel < 0.0
 	return vel * damp * float(_dampen) + vel * float(!_dampen)
 
+static func should_emit_momentum_particles(emitting : bool, vel : float, thresh : float, stop_thresh : float) -> bool:
+	if emitting:
+		return vel <= -stop_thresh
+	else:
+		return vel <= -thresh
+
 static func get_first_overlapping_platform(p_detect_area : Area2D) -> KinematicBody2D:
 	if p_detect_area.get_overlapping_bodies().size() > 0:
 		return p_detect_area.get_overlapping_bodies()[0] as KinematicBody2D
@@ -46,6 +56,13 @@ func physics_process(delta : float) -> String:
 	
 	# Apply gravity
 	player.velocity.y += get_frame_gravity(delta)
+	
+	# Activate particles if exceeding jumping speed
+	afterimage_particles.emitting = should_emit_momentum_particles(
+			afterimage_particles.emitting,
+			player.velocity.y,
+			afterimage_threshold,
+			afterimage_stop_threshold)
 	
 	# Jump in the air if there are airjumps left
 	if Input.is_action_just_pressed("jump") && player.can_airjump():

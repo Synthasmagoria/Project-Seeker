@@ -7,6 +7,17 @@ func set_target(val : Node) -> void:
 	else:
 		target = val
 
+func _ready() -> void:
+	LevelManager.connect("room_changed", self, "_on_room_changed")
+
+func _on_room_changed() -> void:
+	clear()
+
+## Removes all nodes attached to the manager
+func clear() -> void:
+	for n in get_children():
+		n.queue_free()
+
 ## Instance a particles scene at a position
 func spawn_particles(scn : PackedScene, pos : Vector2) -> Particles2D:
 	var _inst = scn.instance() as Particles2D
@@ -26,7 +37,9 @@ func burst_particles(scn : PackedScene, pos : Vector2, dur : float = 0.0, lt : f
 	return _inst
 
 func _burst_timeout(part_inst : Particles2D) -> void:
-	part_inst.queue_free()
+	if is_instance_valid(part_inst):
+		part_inst.queue_free()
 
 func _burst_duration_timeout(part_inst : Particles2D) -> void:
-	part_inst.emitting = false
+	if is_instance_valid(part_inst):
+		part_inst.emitting = false

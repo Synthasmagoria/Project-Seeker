@@ -30,6 +30,10 @@ func physics_process(delta : float) -> String:
 	# Apply gravity
 	player.velocity.y += get_frame_gravity(delta)
 	
+	# Stop upwards momentum
+	if !player.boosted:
+		player.velocity.y = max(-100.0, player.velocity.y)
+	
 	# Prevent the player's fall speed to exceed the limit
 	player.velocity = limit_fall_velocity(player.velocity, fall_speed_max * fall_speed_max_multiplier)
 	
