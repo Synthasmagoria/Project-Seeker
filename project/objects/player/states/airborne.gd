@@ -19,7 +19,7 @@ func init(args) -> void:
 	afterimage_particles = player.get_node("AfterimageParticles") as Particles2D
 
 func exit() -> void:
-	pass
+	afterimage_particles.emitting = false
 
 static func limit_fall_velocity(vel : Vector2, limit : float) -> Vector2:
 	return Vector2(vel.x, min(vel.y, limit))

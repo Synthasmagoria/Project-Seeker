@@ -42,13 +42,10 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
 
 [node name="CurseSpawner" parent="Middle" index="5" instance=ExtResource( 12 )]
-modulate = Color( 0.498039, 1, 0.831373, 0.5 )
-position = Vector2( 488, 184 )
-passed_values = {
-"default_state": "Spawn",
-"extents": Vector2( 600, 40 ),
-"timeout_duration": 12.0
-}
+position = Vector2( 512, 224 )
+
+[node name="CurseSpawner" parent="Middle/CurseSpawner" index="0"]
+position = Vector2( 0, 0 )
 
 [node name="Dim" parent="Foreground/VisibleOnReady" index="0"]
 texture = SubResource( 5 )
@@ -61,3 +58,5 @@ scale = Vector2( 37, 11.12 )
 texture = ExtResource( 15 )
 script = ExtResource( 14 )
 light_node_path = NodePath("../PlayerLight")
+
+[editable path="Middle/CurseSpawner"]
