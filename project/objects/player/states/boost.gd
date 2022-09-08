@@ -1,6 +1,6 @@
 extends PlayerState
 
-var boost_duration_max : float = 3.0
+var boost_duration_max : float = 4.5
 var next_state : String
 var boost_strength := 400
 

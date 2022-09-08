@@ -7,6 +7,8 @@ export(String, FILE) var level_scene_path
 
 export(bool) var displace_using_level_bounds = true
 
+export(Vector2) var displacement
+
 var _warping : bool
 
 func _ready() -> void:
@@ -51,7 +53,7 @@ func warp() -> void:
 			_pos.y += _bounds.size.y
 		elif _pos.y > _bounds.end.y:
 			_pos.y -= _bounds.size.y
-		Game.player.global_position = _pos
+		Game.player.global_position = _pos + displacement
 	
 	
 	LevelManager.change_from_path(level_scene_path)

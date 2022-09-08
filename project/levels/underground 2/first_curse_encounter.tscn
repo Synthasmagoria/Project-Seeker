@@ -98,6 +98,7 @@ collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource( 6 )
+level_scene_path = "res://levels/underground 2/boost_to_victory.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Middle/WarpLeft" index="0"]
 shape = SubResource( 2 )
