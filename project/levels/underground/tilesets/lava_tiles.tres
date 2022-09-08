@@ -1,0 +1,75 @@
+[gd_resource type="TileSet" load_steps=6 format=2]
+
+[ext_resource path="res://levels/underground/tilesets/lava.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform sampler2D frames: hint_albedo;
+uniform float count;
+uniform float duration;
+uniform float frame_width;
+uniform float start_x = 0;
+
+uniform sampler2D palette : hint_albedo;
+uniform float palette_speed : hint_range(0.1, 2.0) = 1.0;
+
+void fragment()
+{
+	float frame = floor(mod(TIME, count * duration) / duration);
+	float offset = floor((UV.x - start_x) / frame_width);
+	vec2 anim_coord = vec2((mod(offset + frame, count) - offset) * frame_width, 0);
+	
+	anim_coord = ceil(anim_coord / TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE;
+	
+	vec4 img = texture(frames, UV + anim_coord);
+	
+	vec4 col = texture(palette, vec2(fract(img.r + TIME * palette_speed), 0.0));
+	
+	COLOR = col;
+}
+
+
+"
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.477124, 0.995643 )
+colors = PoolColorArray( 0.615686, 0.0862745, 0.0431373, 1, 0.313726, 0, 0.282353, 1, 0.756863, 0.054902, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 10
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = SubResource( 2 )
+shader_param/count = 4.0
+shader_param/duration = 0.2
+shader_param/frame_width = 0.25
+shader_param/start_x = 0.0
+shader_param/palette_speed = 0.707
+shader_param/frames = ExtResource( 2 )
+shader_param/palette = SubResource( 4 )
+
+[resource]
+0/name = "lava.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/material = SubResource( 1 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 128, 32 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0

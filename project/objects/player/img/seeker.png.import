@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bRedRockTiles15.png-bf37bca1ae8ad153265bf80aa3959ca4.stex"
+path="res://.import/seeker.png-4c092b5113dfc15b0684f4ca694155f3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/underground/tilesets/bRedRockTiles15.png"
-dest_files=[ "res://.import/bRedRockTiles15.png-bf37bca1ae8ad153265bf80aa3959ca4.stex" ]
+source_file="res://objects/player/img/seeker.png"
+dest_files=[ "res://.import/seeker.png-4c092b5113dfc15b0684f4ca694155f3.stex" ]
 
 [params]
 

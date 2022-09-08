@@ -37,7 +37,6 @@ format = 1
 
 [node name="Spikes" parent="Middle" instance=ExtResource( 6 )]
 tile_set = ExtResource( 5 )
-tile_data = PoolIntArray(  )
 
 [node name="Foreground" type="Node2D" parent="."]
 z_index = 2
