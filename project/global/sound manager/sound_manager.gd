@@ -11,7 +11,9 @@ func _ready() -> void:
 # Adds new AudioStreamPlayers to the sound streams node
 func _init_sound_streams() -> void:
 	for i in SOUND_STREAMS:
-		$SoundStreams.add_child(AudioStreamPlayer.new())
+		var _stream = AudioStreamPlayer.new()
+		_stream.bus = "Effect"
+		$SoundStreams.add_child(_stream)
 
 # Increments the sound index
 func _increment_sound_index() -> void:

@@ -204,19 +204,21 @@ on_ready = true
 follow_group = "player"
 
 [node name="CurseArea3" parent="Foreground" index="2" instance=ExtResource( 5 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 584, 1144 )
 extents = Vector2( 48, 48 )
 
 [node name="CurseArea4" parent="Foreground" index="3" instance=ExtResource( 5 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 944, 776 )
 extents = Vector2( 48, 48 )
 
 [node name="CurseArea5" parent="Foreground" index="4" instance=ExtResource( 5 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 984, 24 )
 extents = Vector2( 48, 64 )
 
 [node name="LightChecker" parent="Foreground" index="6"]
-visible = false
 position = Vector2( 840, 1304 )
 scale = Vector2( 7.44, 11.12 )
 

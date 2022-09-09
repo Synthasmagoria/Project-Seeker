@@ -73,18 +73,22 @@ position = Vector2( 496, 632 )
 scale = Vector2( 3, 1 )
 
 [node name="CurseArea" parent="Foreground" index="2" instance=ExtResource( 3 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 416, 240 )
 extents = Vector2( 50, 60 )
 
 [node name="CurseArea2" parent="Foreground" index="3" instance=ExtResource( 3 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 736, 544 )
 extents = Vector2( 60, 60 )
 
 [node name="CurseArea3" parent="Foreground" index="4" instance=ExtResource( 3 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 160, 326 )
 extents = Vector2( 90, 40 )
 
 [node name="CurseArea4" parent="Foreground" index="5" instance=ExtResource( 3 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 112, 410 )
 extents = Vector2( 90, 40 )
 

@@ -44,6 +44,7 @@ visible = true
 texture = ExtResource( 4 )
 
 [node name="LightChecker" type="Sprite" parent="Foreground" index="2"]
+visible = false
 modulate = Color( 1, 0.39, 0.39, 0.509804 )
 position = Vector2( 544, 504 )
 scale = Vector2( 37, 11.12 )

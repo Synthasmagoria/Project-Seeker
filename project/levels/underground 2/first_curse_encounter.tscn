@@ -169,7 +169,7 @@ position = Vector2( 544, 472 )
 scale = Vector2( 37, 11.12 )
 texture = ExtResource( 15 )
 script = ExtResource( 14 )
-light_node_path = NodePath("../FollowPlayer")
+light_node_path = NodePath("../VisibilityOnReady/PlayerLight")
 
 [node name="Popup2D" type="Area2D" parent="Foreground" index="6"]
 position = Vector2( 840, 496 )

@@ -15,6 +15,8 @@ var particles : Particles2D
 ##
 var walk_velocity_multiplier := 0.25
 
+var sound : AudioStreamPlayer
+
 func enter() -> void:
 	player.modulate = Color.coral
 	duration = 0.0

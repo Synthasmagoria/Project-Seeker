@@ -1,6 +1,7 @@
 extends PlayerState
 
 var jump_strength := 400.0
+var JUMP_SOUND = preload("res://objects/player/snd/jump.wav")
 
 func enter() -> void:
 	player.boosted = false
@@ -21,6 +22,7 @@ func physics_process(delta : float) -> String:
 	if Input.is_action_just_pressed("jump"):
 		player.velocity.y = -jump_strength
 		_jumped = true
+		SoundManager.play_sound(JUMP_SOUND)
 		# Add platform velocity to player's velocity when jumping off a platform
 		if player.platform:
 			player.velocity.y += min(0.0, player.platform_velocity.y)

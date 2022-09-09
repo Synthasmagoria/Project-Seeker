@@ -12,6 +12,8 @@ var afterimage_threshold := 500.0
 var afterimage_particles : Particles2D
 var afterimage_stop_threshold := 100.0
 const AIRJUMP_PARTICLES = preload("res://objects/player/particles/airjump.tscn")
+const AIRJUMP_SOUND = preload("res://objects/player/snd/airjump.wav")
+const MOMENTUM_SOUND = preload("res://objects/player/snd/momentum.wav")
 
 func init(args) -> void:
 	.init(args)
@@ -58,16 +60,22 @@ func physics_process(delta : float) -> String:
 	player.velocity.y += get_frame_gravity(delta)
 	
 	# Activate particles if exceeding jumping speed
-	afterimage_particles.emitting = should_emit_momentum_particles(
+	var emit = should_emit_momentum_particles(
 			afterimage_particles.emitting,
 			player.velocity.y,
 			afterimage_threshold,
 			afterimage_stop_threshold)
 	
+	if emit && !afterimage_particles.emitting:
+		SoundManager.play_sound(MOMENTUM_SOUND)
+	
+	afterimage_particles.emitting = emit
+	
 	# Jump in the air if there are airjumps left
 	if Input.is_action_just_pressed("jump") && player.can_airjump():
 		player.velocity.y = -airjump_strength
 		player.count_airjump()
+		SoundManager.play_sound(AIRJUMP_SOUND)
 		ParticleManager.burst_particles(
 				AIRJUMP_PARTICLES,
 				Vector2(player.global_position.x, get_bottom($"%KinematicHitshape").y),

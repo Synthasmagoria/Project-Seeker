@@ -4,6 +4,8 @@ var boost_duration_max : float = 4.5
 var next_state : String
 var boost_strength := 400
 
+var BOOST_SOUND_RESOURCE = preload("res://objects/player/snd/boosting.wav")
+
 var BOOST_PARTICLES_SCENE = preload("res://objects/player/particles/boost.tscn")
 
 var particles : Particles2D
@@ -13,6 +15,7 @@ func enter() -> void:
 	var _dur = clamp(player.state_machine.get_state_by_name("ChargingBoost").duration * 0.5, 0.0, boost_duration_max)
 	get_tree().create_timer(_dur).connect("timeout", self, "_timeout")
 	particles = ParticleManager.burst_particles(BOOST_PARTICLES_SCENE, get_wand_facing_down(player, $"%KinematicHitshape"), _dur)
+	SoundManager.play_sound(BOOST_SOUND_RESOURCE)
 
 func _timeout() -> void:
 	next_state = POP_STATE
