@@ -8,6 +8,8 @@ export(bool) var recheck_post_exit
 
 export(bool) var use_level_bounds = true
 
+var view_size = Vector2(1024, 608)
+
 var target : Node2D
 
 func set_limits(rect : Rect2) -> void:
@@ -27,6 +29,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	follow_target()
+	position = clamp_to_bounds(position)
+	
+func clamp_to_bounds(pos : Vector2) -> Vector2:
+	return Vector2(
+			clamp(position.x, limit_left + view_size.x / 2.0, limit_right - view_size.x / 2.0),
+			clamp(position.y, limit_top + view_size.y / 2.0, limit_bottom - view_size.y / 2.0))
 
 func follow_target() -> void:
 	position = target.position

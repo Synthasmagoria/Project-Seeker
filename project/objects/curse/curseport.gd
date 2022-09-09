@@ -9,6 +9,9 @@ func _ready() -> void:
 	set_up(self)
 	connect_to_room_changed(self, "clear")
 
+func _process(delta: float) -> void:
+	canvas_transform = LevelManager.get_viewport().canvas_transform
+
 func clear() -> void:
 	for n in get_children():
 		n.queue_free()

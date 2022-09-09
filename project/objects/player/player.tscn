@@ -56,6 +56,7 @@ shape = ExtResource( 2 )
 
 [node name="AfterimageParticles" type="Particles2D" parent="."]
 material = SubResource( 4 )
+emitting = false
 amount = 4
 lifetime = 0.3
 local_coords = false

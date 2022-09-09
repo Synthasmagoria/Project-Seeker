@@ -9,3 +9,4 @@ func enter() -> void:
 	disable_hitshapes()
 	player.dead = true
 	player.set_platform(null)
+	player.queue_free()

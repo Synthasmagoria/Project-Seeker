@@ -139,7 +139,6 @@ func distance_movement(dist : Vector2) -> void:
 	previous_position = position
 	move_and_collide(dist)
 
-
 func _on_Player_tree_exiting() -> void:
 	if Game.player == self:
 		Game.player = null

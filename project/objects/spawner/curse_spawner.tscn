@@ -28,7 +28,6 @@ texture = ExtResource( 3 )
 
 [node name="CurseSpawner" type="Node2D" parent="."]
 modulate = Color( 0.498039, 1, 0.831373, 0.5 )
-position = Vector2( 592, 376 )
 script = ExtResource( 2 )
 scene = ExtResource( 1 )
 passed_values = {

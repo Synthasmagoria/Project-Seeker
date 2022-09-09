@@ -3,9 +3,6 @@ extends Sprite
 export(NodePath) var light_node_path
 onready var light = get_node(light_node_path)
 
-func _ready() -> void:
-	print_debug(get_rect())
-
 func get_world_rect() -> Rect2:
 	var _size = texture.get_size() * scale
 	return Rect2(global_position - _size / 2.0, _size)

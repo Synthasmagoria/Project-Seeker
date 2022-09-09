@@ -1,0 +1,87 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://objects/level.gd" type="Script" id=1]
+[ext_resource path="res://objects/snow visuals/snow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/solidmap/solids_32.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/player/player start/player_start.tscn" type="PackedScene" id=4]
+[ext_resource path="res://levels/mountain/tilesets/rock_tileset.tres" type="TileSet" id=5]
+[ext_resource path="res://levels/mountain/tilesets/rock_background_tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://objects/spike/spike.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/follow_camera.gd" type="Script" id=8]
+[ext_resource path="res://objects/curse/visualizer.gd" type="Script" id=9]
+[ext_resource path="res://reusables/follow_node_2d.gd" type="Script" id=10]
+[ext_resource path="res://objects/warp.gd" type="Script" id=11]
+[ext_resource path="res://levels/mountain/tilesets/snow_tileset.tres" type="TileSet" id=12]
+[ext_resource path="res://objects/spawner/curse_spawner.tscn" type="PackedScene" id=13]
+
+[node name="Level2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Solids" parent="." instance=ExtResource( 3 )]
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -2
+
+[node name="Rock" type="TileMap" parent="Background"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+
+[node name="SnowyVisuals" parent="Background" instance=ExtResource( 2 )]
+hide_snow_fg = true
+
+[node name="Middle" type="Node2D" parent="."]
+
+[node name="Rock" type="TileMap" parent="Middle"]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+
+[node name="Spikes" parent="Middle" instance=ExtResource( 7 )]
+collision_layer = 0
+collision_mask = 8
+
+[node name="Snow" type="TileMap" parent="Middle"]
+tile_set = ExtResource( 12 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+
+[node name="Foreground" type="Node2D" parent="."]
+z_index = 2
+
+[node name="FollowCamera" type="Node2D" parent="Foreground"]
+script = ExtResource( 10 )
+follow_node = NodePath("../../FollowCamera2D")
+
+[node name="CurseVisualizer2D" type="Sprite" parent="Foreground/FollowCamera"]
+script = ExtResource( 9 )
+
+[node name="Sprite" parent="Foreground" instance=ExtResource( 13 )]
+position = Vector2( 512, 680 )
+
+[node name="CurseSpawner" parent="Foreground/Sprite" index="0"]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
+
+[node name="PlayerStart" parent="." instance=ExtResource( 4 )]
+save_on_create = true
+
+[node name="FollowCamera2D" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 8 )
+
+[node name="Warp2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 11 )
+
+[node name="Warp2D2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource( 11 )
+
+[editable path="Foreground/Sprite"]

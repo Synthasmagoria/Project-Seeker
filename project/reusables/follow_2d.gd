@@ -5,6 +5,8 @@ class_name Follow2D
 ## Starts following the first node in the specified group on ready
 export(bool) var on_ready : bool
 
+export(Vector2) var offset : Vector2
+
 ## The group to follow. For use with on_ready
 export(String) var follow_group : String
 
@@ -29,7 +31,7 @@ func follow(group : String) -> void:
 
 # Follows the target's position
 func _follow() -> void:
-	global_position = _target.global_position
+	global_position = _target.global_position + offset
 
 func _ready() -> void:
 	if on_ready:
