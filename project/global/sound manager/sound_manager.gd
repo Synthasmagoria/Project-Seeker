@@ -40,6 +40,7 @@ func play_music(mus : AudioStream) -> AudioStreamPlayer:
 		return null
 	
 	var _stream = $MusicStreams.get_child(_get_previous_music_index()) as AudioStreamPlayer
+	print_debug(_stream, _stream.stream, mus)
 	if _stream.playing && _stream.stream == mus:
 		return _stream
 	

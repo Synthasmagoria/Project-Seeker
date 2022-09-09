@@ -6,7 +6,7 @@
 [ext_resource path="res://reusables/visibility_on_ready.gd" type="Script" id=4]
 [ext_resource path="res://objects/curse/area.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/warp.gd" type="Script" id=6]
-[ext_resource path="res://levels/underground 2/music/underground.ogg" type="AudioStream" id=7]
+[ext_resource path="res://levels/underground 2/music/underground.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 323.25, 10 )
@@ -103,10 +103,12 @@ position = Vector2( -12.2947, 43.7898 )
 position = Vector2( -31.7757, -32.5424 )
 
 [node name="CurseArea" parent="Middle" index="7" instance=ExtResource( 5 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 496, 272 )
 extents = Vector2( 64, 72 )
 
 [node name="CurseArea2" parent="Middle" index="8" instance=ExtResource( 5 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 656, -8 )
 extents = Vector2( 224, 64 )
 

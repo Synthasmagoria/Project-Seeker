@@ -10,7 +10,7 @@
 [ext_resource path="res://objects/popup.gd" type="Script" id=8]
 [ext_resource path="res://objects/warp.gd" type="Script" id=9]
 [ext_resource path="res://reusables/visibility_on_ready.gd" type="Script" id=10]
-[ext_resource path="res://levels/underground 2/music/underground.ogg" type="AudioStream" id=11]
+[ext_resource path="res://levels/underground 2/music/underground.wav" type="AudioStream" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
