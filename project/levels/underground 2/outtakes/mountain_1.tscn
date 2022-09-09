@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://levels/underground 2/cm_parent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/underground 2/parents/cm_parent.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/node wheel/node_wheel_state.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/platform/platform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/node wheel/node_wheel_path.gd" type="Script" id=4]
@@ -36,6 +36,9 @@ tile_data = PoolIntArray( 2031616, 0, 0, 2031617, 0, 0, 2031618, 0, 0, 2031619, 
 
 [node name="CurseSpawner" parent="Middle" index="5"]
 position = Vector2( 512, 1912 )
+
+[node name="CurseSpawner" parent="Middle/CurseSpawner" index="0"]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 
 [node name="NodeWheelPath2D" type="Path2D" parent="Middle" index="6"]
 position = Vector2( 504, 1630 )
@@ -125,7 +128,6 @@ follow_group = "player"
 enabled = false
 
 [node name="CurseArea" parent="Foreground" index="4" instance=ExtResource( 8 )]
-modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 976, 1016 )
 extents = Vector2( 64, 224 )
 

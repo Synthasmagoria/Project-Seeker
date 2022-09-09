@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://levels/underground 2/cm_parent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/underground 2/parents/cm_parent.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/warp.gd" type="Script" id=2]
 [ext_resource path="res://objects/follow_camera.gd" type="Script" id=3]
 [ext_resource path="res://objects/node wheel/node_wheel_state.tscn" type="PackedScene" id=4]

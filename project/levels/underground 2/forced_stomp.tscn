@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://levels/underground 2/cm_parent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/underground 2/parents/cm_parent.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/node wheel/node_wheel_state.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/platform/platform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://reusables/visibility_on_ready.gd" type="Script" id=4]
@@ -9,10 +9,12 @@
 [ext_resource path="res://objects/hiding spot/hiding_spot.tscn" type="PackedScene" id=7]
 [ext_resource path="res://reusables/follow_2d.gd" type="Script" id=8]
 [ext_resource path="res://reusables/flashlight.png" type="Texture" id=9]
+[ext_resource path="res://levels/underground 2/music/overground.ogg" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=6]
 
 [node name="Level" instance=ExtResource( 1 )]
+music = ExtResource( 10 )
 size = Vector2( 1024, 1216 )
 
 [node name="Solids" parent="." index="0"]
@@ -43,6 +45,9 @@ tile_data = PoolIntArray( 1114146, 0, 0, 1114147, 0, 0, 1114148, 0, 0, 1114149, 
 
 [node name="CurseSpawner" parent="Middle" index="5"]
 position = Vector2( 512, 832 )
+
+[node name="CurseSpawner" parent="Middle/CurseSpawner" index="0"]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 
 [node name="NodeWheelState" parent="Middle" index="6" instance=ExtResource( 2 )]
 position = Vector2( 80, 1072 )
@@ -207,17 +212,14 @@ on_ready = true
 follow_group = "player"
 
 [node name="CurseArea3" parent="Foreground" index="3" instance=ExtResource( 5 )]
-modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 584, 1144 )
 extents = Vector2( 48, 48 )
 
 [node name="CurseArea4" parent="Foreground" index="4" instance=ExtResource( 5 )]
-modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 944, 776 )
 extents = Vector2( 48, 48 )
 
 [node name="CurseArea5" parent="Foreground" index="5" instance=ExtResource( 5 )]
-modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 984, 24 )
 extents = Vector2( 48, 64 )
 
