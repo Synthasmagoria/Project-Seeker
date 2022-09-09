@@ -57,12 +57,12 @@ centered = false
 script = ExtResource( 5 )
 visibility_on_ready = true
 
-[node name="FollowPlayer" type="Node2D" parent="Foreground"]
+[node name="VisibilityOnReady" type="Node2D" parent="Foreground"]
 script = ExtResource( 5 )
 visibility_on_ready = true
 
-[node name="PlayerLight" type="Light2D" parent="Foreground/FollowPlayer"]
-position = Vector2( -240, -176 )
+[node name="PlayerLight" type="Light2D" parent="Foreground/VisibilityOnReady"]
+position = Vector2( -400, -192 )
 scale = Vector2( 4, 4 )
 z_index = 3
 texture = ExtResource( 11 )

@@ -53,7 +53,9 @@ func warp() -> void:
 			_pos.y += _bounds.size.y
 		elif _pos.y > _bounds.end.y:
 			_pos.y -= _bounds.size.y
-		Game.player.global_position = _pos + displacement
+		Game.player.global_position = _pos
+	
+	Game.player.position += displacement
 	
 	
 	LevelManager.change_from_path(level_scene_path)

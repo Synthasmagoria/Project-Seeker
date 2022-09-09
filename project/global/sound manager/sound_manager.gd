@@ -3,8 +3,7 @@ extends Node
 const SOUND_STREAMS := 50
 var sound_index := 0
 
-const MUSIC_STREAMS := 2
-var music_index := 0
+onready var music_player = $MusicPlayer 
 
 func _ready() -> void:
 	_init_sound_streams()
@@ -13,18 +12,10 @@ func _ready() -> void:
 func _init_sound_streams() -> void:
 	for i in SOUND_STREAMS:
 		$SoundStreams.add_child(AudioStreamPlayer.new())
-	for i in MUSIC_STREAMS:
-		$MusicStreams.add_child(AudioStreamPlayer.new())
 
 # Increments the sound index
 func _increment_sound_index() -> void:
 	sound_index = (sound_index + 1) % SOUND_STREAMS
-
-func _increment_music_index() -> void:
-	music_index = (music_index + 1) % MUSIC_STREAMS
-
-func _get_previous_music_index() -> int:
-	return wrapi(music_index - 1, 0, MUSIC_STREAMS - 1)
 
 ## Plays a sound and returns the stream player that was used
 func play_sound(snd : AudioStreamSample) -> AudioStreamPlayer:
@@ -35,24 +26,21 @@ func play_sound(snd : AudioStreamSample) -> AudioStreamPlayer:
 	return _stream
 
 func play_music(mus : AudioStream) -> AudioStreamPlayer:
+	# Stop if passed null
 	if !mus:
 		stop_music()
 		return null
 	
-	var _stream = $MusicStreams.get_child(_get_previous_music_index()) as AudioStreamPlayer
-	print_debug(_stream, _stream.stream, mus)
-	if _stream.playing && _stream.stream == mus:
-		return _stream
+	# Prevent the same music from restarting if attempted to play twice
+	if music_player.playing && music_player.stream.resource_path == mus.resource_path:
+		return music_player
 	
-	if _stream.playing:
-		_stream.stop()
+	if music_player.playing:
+		music_player.stop()
 	
-	_stream = $MusicStreams.get_child(music_index) as AudioStreamPlayer
-	_stream.stream = mus
-	_stream.play()
-	_increment_music_index()
-	return _stream
+	music_player.stream = mus
+	music_player.play()
+	return music_player
 
 func stop_music() -> void:
-	for n in $MusicStreams.get_children():
-		n.stop()
+	music_player.stop()

@@ -22,7 +22,7 @@ format = 1
 hide_snow_fg = true
 
 [node name="CurseSpawner" parent="Background" index="3" instance=ExtResource( 12 )]
-position = Vector2( 512, 224 )
+position = Vector2( 512, 216 )
 
 [node name="CurseSpawner" parent="Background/CurseSpawner" index="0"]
 modulate = Color( 0.498039, 1, 0.831373, 0.5 )
@@ -44,12 +44,11 @@ visible = true
 texture = ExtResource( 4 )
 
 [node name="LightChecker" type="Sprite" parent="Foreground" index="2"]
-visible = false
 modulate = Color( 1, 0.39, 0.39, 0.509804 )
-position = Vector2( 544, 472 )
+position = Vector2( 544, 504 )
 scale = Vector2( 37, 11.12 )
 texture = ExtResource( 15 )
 script = ExtResource( 14 )
-light_node_path = NodePath("../FollowPlayer")
+light_node_path = NodePath("../VisibilityOnReady/PlayerLight")
 
 [editable path="Background/CurseSpawner"]
