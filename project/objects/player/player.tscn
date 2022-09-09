@@ -43,12 +43,13 @@ spell_scene = ExtResource( 8 )
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Staff" type="Sprite" parent="Pivot"]
-position = Vector2( -10, -2 )
+position = Vector2( 10, -2 )
 texture = ExtResource( 13 )
 
 [node name="Seeker" type="Sprite" parent="Pivot"]
 texture = ExtResource( 9 )
 offset = Vector2( 0, -2 )
+flip_h = true
 
 [node name="KinematicHitshape" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true

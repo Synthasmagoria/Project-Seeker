@@ -119,7 +119,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		shoot()
 
-func velocity_movement(vel : Vector2, snap : bool) -> void:
+func velocity_movement(vel : Vector2, snap : bool, walked = true) -> void:
 	previous_position = position
 	move_and_slide_with_snap(vel, get_snap_vector(snap_distance, up) * float(snap), up)
 	
@@ -132,8 +132,9 @@ func velocity_movement(vel : Vector2, snap : bool) -> void:
 	else:
 		set_platform(null)
 	
-	if previous_position.x != position.x:
+	if walked && previous_position.x != position.x:
 		facing = sign(position.x - previous_position.x)
+		$Pivot.scale.x = facing
 
 func distance_movement(dist : Vector2) -> void:
 	previous_position = position

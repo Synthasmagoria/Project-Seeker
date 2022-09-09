@@ -13,6 +13,8 @@ func physics_process(delta : float) -> String:
 	# Apply walking velocity
 	player.velocity.x = get_walk_velocity()
 	
+	var _walked = get_walk_velocity() != 0.0
+	
 	# Set falling speed to gravity (for floor check)
 	player.velocity.y = get_frame_gravity(delta)
 	
@@ -27,7 +29,7 @@ func physics_process(delta : float) -> String:
 		if player.platform:
 			player.velocity.y += min(0.0, player.platform_velocity.y)
 	
-	player.velocity_movement(player.velocity, !_jumped)
+	player.velocity_movement(player.velocity, !_jumped, _walked)
 	
 	player.refresh_airjumps()
 	
