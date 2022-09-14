@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://objects/level.gd" type="Script" id=1]
 [ext_resource path="res://objects/spike/spike.tscn" type="PackedScene" id=2]
@@ -8,11 +8,12 @@
 [ext_resource path="res://reusables/white_square.png" type="Texture" id=6]
 [ext_resource path="res://objects/solidmap/solids_32.tscn" type="PackedScene" id=7]
 [ext_resource path="res://levels/underground/tilesets/rocks_bg.tres" type="TileSet" id=8]
-[ext_resource path="res://levels/underground/tilesets/rocks.tres" type="TileSet" id=9]
+[ext_resource path="res://levels/mountain/tilesets/rock_tileset_celeste.tres" type="TileSet" id=9]
 [ext_resource path="res://reusables/follow_2d.gd" type="Script" id=10]
 [ext_resource path="res://reusables/flashlight.png" type="Texture" id=11]
 [ext_resource path="res://reusables/follow_node_2d.gd" type="Script" id=12]
 [ext_resource path="res://objects/follow_camera.gd" type="Script" id=13]
+[ext_resource path="res://levels/mountain/tilesets/rock_tileset_celeste_behin.tres" type="TileSet" id=14]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -34,6 +35,12 @@ format = 1
 [node name="PlayerStart" parent="Middle" instance=ExtResource( 3 )]
 position = Vector2( 32, -32 )
 save_on_create = true
+
+[node name="RockBg" type="TileMap" parent="Middle"]
+tile_set = ExtResource( 14 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
 
 [node name="Rock" type="TileMap" parent="Middle"]
 tile_set = ExtResource( 9 )
