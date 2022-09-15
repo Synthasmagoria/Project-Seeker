@@ -153,10 +153,12 @@ offset = 553.228
 position = Vector2( 640, 176 )
 
 [node name="CurseArea" parent="Middle" index="13" instance=ExtResource( 2 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 824, 192 )
 extents = Vector2( 48, 48 )
 
 [node name="CurseArea2" parent="Middle" index="14" instance=ExtResource( 2 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 992, 96 )
 extents = Vector2( 48, 48 )
 
@@ -168,6 +170,7 @@ visible = true
 texture = ExtResource( 20 )
 
 [node name="CurseArea2" parent="Foreground" index="3" instance=ExtResource( 2 )]
+modulate = Color( 0.498039, 1, 0.831373, 0.5 )
 position = Vector2( 656, 606 )
 extents = Vector2( 224, 64 )
 

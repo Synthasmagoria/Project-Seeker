@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/curse/area.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/spawner/spawner.gd" type="Script" id=2]
-[ext_resource path="res://objects/spawner/curse_spawner.png" type="Texture" id=3]
+[ext_resource path="res://objects/spawner/curse_spawner_mask.png" type="Texture" id=3]
+[ext_resource path="res://objects/spawner/curse_spawner.png" type="Texture" id=4]
+[ext_resource path="res://objects/spawner/curse_spawner_visual.gd" type="Script" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.5.stable's CanvasItemMaterial.
@@ -11,20 +13,37 @@ shader_type canvas_item;
 render_mode blend_sub;
 
 uniform float horizontal_oscilation : hint_range(0.002, 0.01) = 0.005;
+uniform sampler2D mask : hint_albedo;
+uniform float fill : hint_range(0.0, 1.0) = 0.0;
+uniform float stretch : hint_range(0.0, 16.0) = 16.0;
 
 void fragment()
 {
-	COLOR = texture(TEXTURE, UV + vec2(sin(UV.y * 32.0 + TIME), 0.0) * horizontal_oscilation);
+	float osc = sin(UV.y * 32.0 + TIME) * horizontal_oscilation;
+	vec2 uv = UV + vec2(osc, 0.0);
+	
+	float f = step(abs(uv.y - 0.5) * 2.0, fill);
+	vec4 mask_col = texture(mask, uv);
+	vec2 uv_stretch = uv;
+	uv_stretch.y = (uv_stretch.y - 0.5) * (1.0 + (1.0 - fill) * stretch) + 0.5;
+	vec4 mask_stretch = texture(mask, uv_stretch);
+	vec4 col = texture(TEXTURE, uv);
+	
+	COLOR = col + mask_stretch * mask_col * f;
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 shader_param/horizontal_oscilation = 0.003
+shader_param/fill = 1.0
+shader_param/stretch = 4.0
+shader_param/mask = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite"]
 modulate = Color( 1, 1, 1, 0.156863 )
 material = SubResource( 2 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="CurseSpawner" type="Node2D" parent="."]
 modulate = Color( 0.498039, 1, 0.831373, 0.5 )
