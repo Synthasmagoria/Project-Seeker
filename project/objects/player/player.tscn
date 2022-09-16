@@ -40,6 +40,9 @@ collision_mask = 15
 script = ExtResource( 1 )
 spell_scene = ExtResource( 8 )
 
+[node name="Feet" type="Position2D" parent="."]
+position = Vector2( 0, 12 )
+
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Staff" type="Sprite" parent="Pivot"]
