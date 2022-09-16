@@ -7,7 +7,8 @@ func enter() -> void:
 	player.boosted = false
 
 func exit() -> void:
-	pass
+	var _cam = NodeUtil.get_first_node_in_group_in_current_level("camera")
+	_cam.look(Vector2.ZERO)
 
 func physics_process(delta : float) -> String:
 	# Apply walking velocity
@@ -32,6 +33,17 @@ func physics_process(delta : float) -> String:
 	player.velocity_movement(player.velocity, !_jumped, _walked)
 	
 	player.refresh_airjumps()
+	
+	var _cam = NodeUtil.get_first_node_in_group_in_current_level("camera")
+	if Input.is_action_just_pressed("up"):
+		_cam.look(Vector2(0, -128.0))
+	elif Input.is_action_just_released("up"):
+		_cam.look(Vector2.ZERO)
+	
+	if Input.is_action_just_pressed("down"):
+		_cam.look(Vector2(0, 128.0))
+	elif Input.is_action_just_released("down"):
+		_cam.look(Vector2.ZERO)
 	
 	if $"%InteractableDetector".get_overlapping_areas().size() > 0 && Input.is_action_just_pressed("up"):
 		return "Hiding"

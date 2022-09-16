@@ -12,6 +12,18 @@ var view_size = Vector2(1024, 608)
 
 var target : Node2D
 
+const LOOK_DURATION = 1.0
+const LOOK_DISTANCE = 128.0
+var _look_tween : SceneTreeTween
+var _look_offset : Vector2
+func look(val : Vector2) -> void:
+	if is_instance_valid(_look_tween) && _look_tween.is_running():
+		_look_tween.stop()
+	_look_tween = create_tween()
+	_look_tween.set_trans(Tween.TRANS_SINE)
+	var _dur = _look_offset.distance_to(val) / LOOK_DISTANCE * LOOK_DURATION
+	_look_tween.tween_property(self, "_look_offset", val, _dur)
+
 func set_limits(rect : Rect2) -> void:
 	limit_left = rect.position.x
 	limit_right = rect.position.x + rect.size.x
@@ -29,6 +41,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	follow_target()
+	position += _look_offset
 	position = clamp_to_bounds(position)
 	
 func clamp_to_bounds(pos : Vector2) -> Vector2:
