@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/protective_rock_mask.png-1c387ca31a9058adc6190694924a0ab2.stex"
+path="res://.import/crystal_tile_front.png-fb1d82e2333aa728d87570040cd8ea40.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/hiding spot/protective_rock_mask.png"
-dest_files=[ "res://.import/protective_rock_mask.png-1c387ca31a9058adc6190694924a0ab2.stex" ]
+source_file="res://objects/hiding spot/crystal tiles/crystal_tile_front.png"
+dest_files=[ "res://.import/crystal_tile_front.png-fb1d82e2333aa728d87570040cd8ea40.stex" ]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://levels/underground 2/parents/cm_parent.tscn" type="PackedScene" id=1]
-[ext_resource path="res://objects/hiding spot/hiding_spot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/hiding spot/old/hiding_spot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/curse/area.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/mountain/tilesets/rock_background_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://objects/node wheel/node_wheel_state.tscn" type="PackedScene" id=5]

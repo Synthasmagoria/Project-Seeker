@@ -5,7 +5,7 @@
 [ext_resource path="res://objects/platform/platform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/node wheel/node_wheel_path.gd" type="Script" id=4]
 [ext_resource path="res://objects/node wheel/path follow/node_wheel_path_follow.tscn" type="PackedScene" id=5]
-[ext_resource path="res://objects/hiding spot/hiding_spot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/hiding spot/old/hiding_spot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://reusables/follow_2d.gd" type="Script" id=7]
 [ext_resource path="res://objects/curse/area.tscn" type="PackedScene" id=8]
 [ext_resource path="res://reusables/flashlight.png" type="Texture" id=9]
