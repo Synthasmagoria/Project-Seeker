@@ -124,7 +124,7 @@ func physics_process(delta : float) -> String:
 	if Input.is_action_pressed("up") && !player.boosted:
 		return "ChargingBoost"
 	
-	if Input.is_action_pressed("jump") && Input.is_action_pressed("down"):
+	if Input.is_action_pressed("down"):
 		return "DownDash"
 	
 	return KEEP_STATE

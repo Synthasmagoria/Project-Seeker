@@ -100,7 +100,7 @@ margin_left = 512.0
 margin_top = 120.0
 margin_right = 832.0
 margin_bottom = 200.0
-color = Color( 0, 0, 0, 0.305882 )
+color = Color( 0, 0, 0, 0.439216 )
 
 [node name="Instruction" type="RichTextLabel" parent="Visual"]
 margin_left = 528.0

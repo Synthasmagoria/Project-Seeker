@@ -8,7 +8,8 @@ func enter() -> void:
 
 func exit() -> void:
 	var _cam = NodeUtil.get_first_node_in_group_in_current_level("camera")
-	_cam.look(Vector2.ZERO)
+	if _cam:
+		_cam.look(Vector2.ZERO)
 
 func physics_process(delta : float) -> String:
 	# Apply walking velocity
@@ -19,7 +20,7 @@ func physics_process(delta : float) -> String:
 	# Set falling speed to gravity (for floor check)
 	player.velocity.y = get_frame_gravity(delta)
 	
-	# A vairable for toggling snap off when jumping
+	# A variable for toggling snap off when jumping
 	var _jumped = false
 	
 	if Input.is_action_just_pressed("jump"):
@@ -34,17 +35,21 @@ func physics_process(delta : float) -> String:
 	
 	player.refresh_airjumps()
 	
+	# TODO: Please use null object pattern
+	# Look around using the camera
 	var _cam = NodeUtil.get_first_node_in_group_in_current_level("camera")
-	if Input.is_action_just_pressed("up"):
-		_cam.look(Vector2(0, -128.0))
-	elif Input.is_action_just_released("up"):
-		_cam.look(Vector2.ZERO)
+	if _cam:
+		if Input.is_action_just_pressed("up"):
+			_cam.look(Vector2(0, -128.0))
+		elif Input.is_action_just_released("up"):
+			_cam.look(Vector2.ZERO)
+		
+		if Input.is_action_just_pressed("down"):
+			_cam.look(Vector2(0, 128.0))
+		elif Input.is_action_just_released("down"):
+			_cam.look(Vector2.ZERO)
 	
-	if Input.is_action_just_pressed("down"):
-		_cam.look(Vector2(0, 128.0))
-	elif Input.is_action_just_released("down"):
-		_cam.look(Vector2.ZERO)
-	
+	# Change state
 	if player.get_enemy_collision() || player.get_killer_collision():
 		return "Dead"
 	elif player.is_on_floor():
