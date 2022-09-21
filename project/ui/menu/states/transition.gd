@@ -1,7 +1,7 @@
 extends MenuState
 
 var duration = 1.0
-onready var visuals = $"../../Visuals"
+onready var visuals = $"../../Menu"
 var next_state = "Invisible"
 var pass_state = KEEP_STATE
 

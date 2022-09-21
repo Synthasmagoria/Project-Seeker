@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "ButtonRemapper",
+"language": "GDScript",
+"path": "res://objects/config/button_remapper.gd"
+}, {
+"base": "Node",
+"class": "Config",
+"language": "GDScript",
+"path": "res://objects/config/config.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "CurseArea2D",
 "language": "GDScript",
@@ -58,11 +68,6 @@ _global_script_classes=[ {
 "class": "Level2D",
 "language": "GDScript",
 "path": "res://objects/level.gd"
-}, {
-"base": "Node",
-"class": "LevelMusic",
-"language": "GDScript",
-"path": "res://objects/level_music.gd"
 }, {
 "base": "Object",
 "class": "Math",
@@ -150,6 +155,8 @@ _global_script_classes=[ {
 "path": "res://objects/node wheel/states/weighed.gd"
 } ]
 _global_script_class_icons={
+"ButtonRemapper": "",
+"Config": "",
 "CurseArea2D": "",
 "CurseState": "",
 "CurseUtil": "",
@@ -160,7 +167,6 @@ _global_script_class_icons={
 "FollowCamera2D": "",
 "GameState": "",
 "Level2D": "",
-"LevelMusic": "",
 "Math": "",
 "MenuState": "",
 "NodeWheel": "",
@@ -285,6 +291,11 @@ control={
 mouse_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+menu={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777245,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

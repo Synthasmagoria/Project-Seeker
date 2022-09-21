@@ -1,9 +1,6 @@
 extends MenuState
 
-onready var visuals = $"../../Visuals"
+onready var visuals = $"../../Menu"
 
 func enter() -> void:
-	visuals.visible = false
-
-func exit() -> void:
-	visuals.visible = true
+	menu.queue_free()
