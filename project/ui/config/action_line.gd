@@ -11,7 +11,7 @@ func set_action(val : String) -> void:
 	call_deferred("update_labels", action)
 
 func update_labels(val : String) -> void:
-	$Action.text = val.capitalize()
+	$Action.text = val.capitalize() + ":"
 	if ButtonRemapper.action_exists(val):
 		$Control.text = OS.get_scancode_string(ButtonRemapper.get_first_input_event_key(val).scancode)
 

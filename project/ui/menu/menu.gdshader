@@ -3,6 +3,7 @@ shader_type canvas_item;
 
 uniform float dist_factor = 64.0;
 uniform vec2 uv_factor = vec2(1.0);
+uniform float time_add;
 
 const float SS_THICKNESS = 0.009;
 const float SS_SMOOTHING = 0.094;
@@ -19,6 +20,6 @@ float smoothplot(float x, float y)
 void fragment()
 {
 	vec2 pos = fract(UV * uv_factor) + vec2(
-		sin(UV.x * dist_factor + TIME), cos(UV.y * dist_factor - TIME * 0.896)) * 0.1;
+		sin(UV.x * dist_factor + TIME + time_add), cos(UV.y * dist_factor - (TIME + time_add) * 0.896)) * 0.1;
 	COLOR = vec4(smoothplot(pos.x, pos.y) + smoothplot(1.0 - pos.y, pos.x));
 }

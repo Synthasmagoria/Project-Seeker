@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://ui/menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://objects/solidmap/solid.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://ui/menu/states/config.gd" type="Script" id=12]
 [ext_resource path="res://ui/config/config.tscn" type="PackedScene" id=13]
 [ext_resource path="res://ui/config/remapper.tscn" type="PackedScene" id=14]
+[ext_resource path="res://ui/menu/shader.gd" type="Script" id=15]
+[ext_resource path="res://ui/menu/menu_nine_patch.png" type="Texture" id=16]
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 9 )
@@ -25,16 +27,19 @@ shader_param/offset = Vector2( 0, 0 )
 shader = ExtResource( 3 )
 shader_param/dist_factor = 64.0
 shader_param/uv_factor = Vector2( 0.6, 0.3 )
+shader_param/time_add = 0.0
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 3 )
 shader_param/dist_factor = 32.0
 shader_param/uv_factor = Vector2( 0.7, 0.1 )
+shader_param/time_add = null
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
 shader_param/dist_factor = 32.0
 shader_param/uv_factor = Vector2( 0.3, 0.6 )
+shader_param/time_add = null
 
 [sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
@@ -119,7 +124,6 @@ script = ExtResource( 10 )
 
 [node name="Config" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
-config_path = NodePath("../../Menu/Config")
 
 [node name="Menu" type="Control" parent="."]
 margin_right = 1024.0
@@ -129,6 +133,8 @@ margin_bottom = 608.0
 unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 15 )
+time_speed_config = -2.0
 
 [node name="TextureRect" type="TextureRect" parent="Menu/Shader"]
 material = SubResource( 9 )
@@ -187,12 +193,26 @@ unique_name_in_owner = true
 margin_right = 1024.0
 margin_bottom = 608.0
 
+[node name="NinePatchRect" type="NinePatchRect" parent="Menu/TitleMenu"]
+modulate = Color( 0, 0, 0, 0.752941 )
+margin_left = 704.0
+margin_top = 240.0
+margin_right = 1024.0
+margin_bottom = 352.0
+texture = ExtResource( 16 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
 [node name="Title" type="RichTextLabel" parent="Menu/TitleMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 768.0
+margin_left = 736.0
 margin_top = 256.0
-margin_right = 768.0
+margin_right = 736.0
 margin_bottom = 256.0
 custom_fonts/normal_font = SubResource( 8 )
 text = "Seeker test
@@ -201,12 +221,13 @@ text = "Seeker test
 [node name="Instruction" type="RichTextLabel" parent="Menu/TitleMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 768.0
+margin_left = 736.0
 margin_top = 288.0
-margin_right = 768.0
+margin_right = 736.0
 margin_bottom = 288.0
 custom_fonts/normal_font = SubResource( 10 )
-text = "Press buttons"
+text = "Press jump to start
+Press escape for config"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/TitleMenu/Instruction"]
 autoplay = "New Anim"
@@ -223,6 +244,7 @@ margin_bottom = -156.0
 remapper_path = NodePath("../Remapper")
 
 [node name="Remapper" parent="Menu" instance=ExtResource( 14 )]
+unique_name_in_owner = true
 visible = false
 
 [connection signal="state_changed" from="StateMachine" to="." method="_on_StateMachine_state_changed"]
