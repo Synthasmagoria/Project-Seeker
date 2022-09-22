@@ -1,0 +1,114 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/config/action_line.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/config/Nexa Bold.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://ui/config/config_menu.gd" type="Script" id=4]
+[ext_resource path="res://ui/config/button.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[node name="Config" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -512.0
+margin_bottom = -208.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Header" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -63.0
+margin_right = 63.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 1 )
+text = "Controls"
+align = 1
+valign = 1
+
+[node name="Jump" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -152.0
+margin_right = 192.0
+margin_bottom = -120.0
+action = "jump"
+
+[node name="Up" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -104.0
+margin_right = 192.0
+margin_bottom = -72.0
+
+[node name="Down" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -56.0
+margin_right = 192.0
+margin_bottom = -24.0
+action = "down"
+
+[node name="Left" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -8.0
+margin_right = 192.0
+margin_bottom = 24.0
+action = "left"
+
+[node name="Right" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = 40.0
+margin_right = 192.0
+margin_bottom = 72.0
+action = "right"
+
+[node name="Reload" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = 88.0
+margin_right = 192.0
+margin_bottom = 120.0
+action = "reload"
+
+[node name="Reset" parent="." instance=ExtResource( 5 )]
+margin_left = -297.0
+margin_top = 136.0
+margin_right = -208.0
+margin_bottom = 166.0
+
+[node name="Label" parent="Reset" index="0"]
+text = "Reset"
+
+[connection signal="remap_requested" from="Jump" to="." method="_on_remap_requested"]
+[connection signal="remap_requested" from="Up" to="." method="_on_remap_requested"]
+[connection signal="remap_requested" from="Down" to="." method="_on_remap_requested"]
+[connection signal="remap_requested" from="Left" to="." method="_on_remap_requested"]
+[connection signal="remap_requested" from="Right" to="." method="_on_remap_requested"]
+[connection signal="remap_requested" from="Reload" to="." method="_on_remap_requested"]
+[connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
+
+[editable path="Reset"]

@@ -6,7 +6,7 @@
 [ext_resource path="res://objects/node wheel/node_wheel_state.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/node wheel/path follow/node_wheel_path_follow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/node wheel/node_wheel_path.gd" type="Script" id=6]
-[ext_resource path="res://ui/menu/Nexa Bold.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://ui/config/Nexa Bold.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://objects/popup.gd" type="Script" id=8]
 [ext_resource path="res://objects/warp.gd" type="Script" id=9]
 [ext_resource path="res://reusables/visibility_on_ready.gd" type="Script" id=10]

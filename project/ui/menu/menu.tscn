@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://ui/menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://objects/solidmap/solid.png" type="Texture" id=2]
 [ext_resource path="res://ui/menu/menu.gdshader" type="Shader" id=3]
-[ext_resource path="res://ui/menu/Nexa Bold.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://ui/config/Nexa Bold.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://base/state machine/state_machine.gd" type="Script" id=5]
 [ext_resource path="res://ui/menu/states/menu.gd" type="Script" id=6]
 [ext_resource path="res://ui/menu/states/transition.gd" type="Script" id=7]
@@ -11,6 +11,9 @@
 [ext_resource path="res://ui/menu/scrolling_texture.tres" type="Shader" id=9]
 [ext_resource path="res://ui/menu/states/invisible.gd" type="Script" id=10]
 [ext_resource path="res://ui/menu/seeker_loop.wav" type="AudioStream" id=11]
+[ext_resource path="res://ui/menu/states/config.gd" type="Script" id=12]
+[ext_resource path="res://ui/config/config.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/config/remapper.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 9 )
@@ -114,11 +117,16 @@ script = ExtResource( 7 )
 [node name="Invisible" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
 
+[node name="Config" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
+config_path = NodePath("../../Menu/Config")
+
 [node name="Menu" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 608.0
 
 [node name="Shader" type="Control" parent="Menu"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -175,6 +183,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TitleMenu" type="Control" parent="Menu"]
+unique_name_in_owner = true
 margin_right = 1024.0
 margin_bottom = 608.0
 
@@ -203,5 +212,17 @@ text = "Press buttons"
 autoplay = "New Anim"
 "anims/New Anim" = SubResource( 11 )
 anims/RESET = SubResource( 12 )
+
+[node name="Config" parent="Menu" instance=ExtResource( 13 )]
+unique_name_in_owner = true
+visible = false
+margin_left = 16.0
+margin_top = 52.0
+margin_right = -496.0
+margin_bottom = -156.0
+remapper_path = NodePath("../Remapper")
+
+[node name="Remapper" parent="Menu" instance=ExtResource( 14 )]
+visible = false
 
 [connection signal="state_changed" from="StateMachine" to="." method="_on_StateMachine_state_changed"]

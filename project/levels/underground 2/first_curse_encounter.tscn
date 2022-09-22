@@ -18,7 +18,7 @@
 [ext_resource path="res://levels/underground 2/music/underground.wav" type="AudioStream" id=16]
 [ext_resource path="res://levels/underground 2/tilesets/mountain_rock_bg.tres" type="TileSet" id=17]
 [ext_resource path="res://objects/popup.gd" type="Script" id=18]
-[ext_resource path="res://ui/menu/Nexa Bold.otf" type="DynamicFontData" id=19]
+[ext_resource path="res://ui/config/Nexa Bold.otf" type="DynamicFontData" id=19]
 [ext_resource path="res://levels/underground 2/misc/darkness_gradient.tres" type="Texture" id=20]
 [ext_resource path="res://objects/checkpoint/voluntary_checkpoint.tscn" type="PackedScene" id=21]
 [ext_resource path="res://levels/underground 2/tilesets/mountain_rock_behind.tres" type="TileSet" id=22]

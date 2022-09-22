@@ -27,7 +27,7 @@ func play_sound(snd : AudioStreamSample) -> AudioStreamPlayer:
 	_increment_sound_index()
 	return _stream
 
-func play_music(mus : AudioStream) -> AudioStreamPlayer:
+func play_music(mus : AudioStream, from : float = 0.0) -> AudioStreamPlayer:
 	# Stop if passed null
 	if !mus:
 		stop_music()
@@ -41,7 +41,7 @@ func play_music(mus : AudioStream) -> AudioStreamPlayer:
 		music_player.stop()
 	
 	music_player.stream = mus
-	music_player.play()
+	music_player.play(from)
 	return music_player
 
 func stop_music() -> void:
