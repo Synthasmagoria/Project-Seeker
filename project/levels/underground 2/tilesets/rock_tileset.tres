@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=2 format=2]
 
-[ext_resource path="res://levels/underground 2/tilesets/celeste rock assembled.png" type="Texture" id=1]
+[ext_resource path="res://levels/underground 2/tilesets/rock_tiles.png" type="Texture" id=1]
 
 [resource]
 0/name = "celeste rock assembled.png 0"

@@ -32,6 +32,7 @@ func _init() -> void:
 	set_base("Solids")
 	add_tilemap_behavior("Middle/Rock", 0, 0, BEHAVIOR.AUTOTILE)
 	add_tilemap_behavior("Middle/RockBg", 0, 1, BEHAVIOR.FILL)
+	add_tilemap_behavior("Middle/RockBg", 0, 0, BEHAVIOR.ROCKS)
 	add_tilemap_behavior("Middle/MountainRock", 1, 0, BEHAVIOR.AUTOTILE)
 	add_tilemap_behavior("Middle/MountainRockBg", 1, 0, BEHAVIOR.AUTOTILE)
 
@@ -48,7 +49,7 @@ func _run() -> void:
 			BEHAVIOR.AUTOTILE:
 				tilemap_autotile_3x3min(base, behavior.source_tile_index, _dest, behavior.tile_index)
 			BEHAVIOR.ROCKS:
-				pass
+				tilemap_tile_rocks(base, behavior.source_tile_index, _dest, behavior.tile_index)
 	
 	# TODO: Check if autotile coordinates are offset by tile region position
 
@@ -61,10 +62,50 @@ func tilemap_fill(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) 
 func tilemap_autotile_3x3min(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
 	var _a_coords = get_tilemap_autotile_coords(dest, dest_ind)
 	for v in src.get_used_cells():
-		var _bitmask = tilemap_cell_get_bitmask(base, src_ind, v)
+		var _bitmask = tilemap_cell_get_bitmask(src, src_ind, v)
 		if _bitmask == INVALID_BITMASK:
 			continue
 		dest.set_cellv(v, 0, false, false, false, _a_coords[_bitmask])
+
+const ROCK_SIZE_MIN : int = 2
+const ROCK_SIZE_MAX : int = 4
+const ROCK_NUMBER : int = 24 # per 100 tiles
+
+func tilemap_tile_rocks(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
+	var _cells = src.get_used_cells_by_id(src_ind)
+	var _area = Util.tilemap_get_used_rect_by_id(src, src_ind)
+	var _number = _cells.size() / 100 * ROCK_NUMBER
+	var _rocks = []
+	
+	# Create random rocks within the area
+	for i in _number:
+		var _size = Vector2(
+			rand_range(ROCK_SIZE_MIN, ROCK_SIZE_MAX),
+			rand_range(ROCK_SIZE_MIN, ROCK_SIZE_MAX))
+		var _position = Vector2(
+				_area.position.x - _size.x + 1 + (randi() % int(_area.size.x + (_size.x - 1) * 2)),
+				_area.position.y - _size.y + 1 + (randi() % int(_area.size.y + (_size.y - 1) * 2)))
+		_rocks.push_back(Rect2(_position, _size))
+	
+	var rock_tilemap = TileMap.new()
+	
+	# Melt all rocks together into one big data structure
+	for rock in _rocks:
+		for x in range(rock.position.x, rock.end.x):
+			for y in range(rock.position.y, rock.end.y):
+				rock_tilemap.set_cell(x, y, 0)
+	
+	# Autotile the rocks onto the destination tilemap
+	tilemap_autotile_3x3min(rock_tilemap, 0, dest, dest_ind)
+	
+	# Clear up after rock tiling algorithm
+	_area = dest.get_used_rect()
+	for x in range(_area.position.x, _area.end.x):
+		for y in range(_area.position.y, _area.end.y):
+			if src.get_cell(x, y) != src_ind:
+				dest.set_cell(x, y, TileMap.INVALID_CELL)
+	
+	rock_tilemap.queue_free()
 
 func find_tilemap_by_name(selection : Array, name : String) -> TileMap:
 	for n in selection:
