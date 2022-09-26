@@ -8,9 +8,9 @@ func enter() -> void:
 	$"%Shader".set_mode(0)
 
 func process(delta : float) -> String:
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("jump"):
 		return "Transition"
-	elif Input.is_action_just_pressed("ui_cancel"):
+	elif Input.is_action_just_pressed("ui_accept"):
 		return "Config"
 	
 	return KEEP_STATE

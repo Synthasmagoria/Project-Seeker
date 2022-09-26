@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/celeste rock behind.png-4f5de7121ada70187a087b7ebf94619d.stex"
+path="res://.import/solid_cm.png-b975197901dcdbef883293b0d17e586b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/mountain/tilesets/celeste rock behind.png"
-dest_files=[ "res://.import/celeste rock behind.png-4f5de7121ada70187a087b7ebf94619d.stex" ]
+source_file="res://levels/underground 2/tilesets/solid_cm.png"
+dest_files=[ "res://.import/solid_cm.png-b975197901dcdbef883293b0d17e586b.stex" ]
 
 [params]
 

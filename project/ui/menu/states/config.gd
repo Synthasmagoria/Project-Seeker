@@ -9,7 +9,7 @@ func enter() -> void:
 	$"%Shader".set_mode(1)
 
 func process(delta : float) -> String:
-	if Input.is_action_just_pressed("ui_cancel") && !$"%Remapper".active:
+	if Input.is_action_just_pressed("ui_accept") && !$"%Remapper".active:
 		return POP_STATE
 	
 	return KEEP_STATE

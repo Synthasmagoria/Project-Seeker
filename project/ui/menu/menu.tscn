@@ -232,8 +232,8 @@ margin_top = 288.0
 margin_right = 736.0
 margin_bottom = 288.0
 custom_fonts/normal_font = SubResource( 10 )
-text = "Press enter to start
-Press escape for config"
+text = "Press jump to start
+Press enter for config"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/TitleMenu/Instruction"]
 autoplay = "New Anim"

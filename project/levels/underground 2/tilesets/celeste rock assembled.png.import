@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/celeste rock assembled.png-5a956e9215b887ad3221aef1f99260f8.stex"
+path="res://.import/celeste rock assembled.png-ca228ec137b565b10c8eed9cf7b31d6d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/mountain/tilesets/celeste rock assembled.png"
-dest_files=[ "res://.import/celeste rock assembled.png-5a956e9215b887ad3221aef1f99260f8.stex" ]
+source_file="res://levels/underground 2/tilesets/celeste rock assembled.png"
+dest_files=[ "res://.import/celeste rock assembled.png-ca228ec137b565b10c8eed9cf7b31d6d.stex" ]
 
 [params]
 
