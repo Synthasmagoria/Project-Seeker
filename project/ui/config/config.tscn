@@ -204,7 +204,7 @@ margin_top = 432.0
 margin_right = -8.0
 margin_bottom = 60.0
 custom_fonts/normal_font = SubResource( 3 )
-text = "Press escape for main menu"
+text = "Press enter for main menu"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Instruction"]
 autoplay = "New Anim"

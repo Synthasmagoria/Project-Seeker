@@ -22,12 +22,12 @@ func connect_to_player(play) -> void:
 		play.connect("entered_platform", self, "_on_player_entered_platform", [play])
 		play.connect("exited_platform", self, "_on_player_exited_platform", [play])
 
-func get_platform_weight(plat : KinematicBody2D, play : KinematicBody2D, factor : float) -> float:
-	if is_instance_valid(plat):
+func get_platform_weight(plat : KinematicBody2D, factor : float) -> float:
+	if is_instance_valid(plat) && is_instance_valid(Game.player):
 		var _plat_up = Math.rotate_v2_90cc(plat.position).normalized()
-		var _regular_weight = play.up.dot(_plat_up) * factor
+		var _regular_weight = Game.player.up.dot(_plat_up) * factor
 		var _frame_weight = _regular_weight + _regular_weight * dash_multiplier * float(_player.platform_dashed)
-		_player.platform_dashed = false
+		Game.player.platform_dashed = false
 		return _frame_weight
 	else:
 		return 0.0
@@ -36,7 +36,7 @@ func adjust_angular_velocity_for_friction(av : float, fric : float) -> float:
 	return max(abs(av) - fric, 0.0) * sign(av)
 
 func calculate_angular_velocity(_av) -> float:
-	var _frame_weight = get_platform_weight(_weighed_platform, _player, weight_factor)
+	var _frame_weight = get_platform_weight(_weighed_platform, weight_factor)
 	_av += _frame_weight
 	_av = adjust_angular_velocity_for_friction(_av, friction)
 	return _av

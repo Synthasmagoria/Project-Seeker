@@ -226,10 +226,6 @@ window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/tile_map_tools/plugin.cfg" )
-
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
