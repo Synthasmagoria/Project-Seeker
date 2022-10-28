@@ -7,14 +7,15 @@ var behaviors : Array
 
 const INVALID_BITMASK = -1
 
-enum BEHAVIOR {FILL, AUTOTILE, AUTOTILE_ONE_DOWN, ROCKS, SNOW}
+enum BEHAVIOR {FILL, AUTOTILE, AUTOTILE_ONE_DOWN, ROCKS, SNOW, LAYERS}
 
 const ALGORITHMS = {
-	BEHAVIOR.FILL : "tilemap_fill",
-	BEHAVIOR.AUTOTILE : "tilemap_autotile_3x3min",
-	BEHAVIOR.AUTOTILE_ONE_DOWN : "tilemap_autotile_3x3min_one_down",
-	BEHAVIOR.ROCKS : "tilemap_autotile_rocks",
-	BEHAVIOR.SNOW : "tilemap_autotile_3x3min_snow"
+	BEHAVIOR.FILL : "algo_fill",
+	BEHAVIOR.AUTOTILE : "algo_3x3min",
+	BEHAVIOR.AUTOTILE_ONE_DOWN : "algo_3x3min_one_down",
+	BEHAVIOR.ROCKS : "algo_rocks",
+	BEHAVIOR.SNOW : "algo_snow",
+	BEHAVIOR.LAYERS : "algo_layers"
 }
 
 class TilingBehavior:
@@ -32,37 +33,50 @@ class TilingBehavior:
 
 var base : TileMap
 
-func add_tiling_behavior(tiling_behavior : TilingBehavior) -> void:
-	behaviors.push_back(tiling_behavior)
-
-func set_base(path : String) -> void:
-	base = get_editor_interface().get_edited_scene_root().get_node_or_null(path)
-
 ## It is required that you set a base here using set_base()
 ## Also add tilemap nodes and algorithms applied here add_tiling_behavior()
 func _init() -> void:
 	pass
 
 func _run() -> void:
+	# Make sure the script is running on a Level2D node
 	if !get_editor_interface().get_edited_scene_root() is Level2D:
 		printerr("Scene root was not of type Level2D")
 		return
 	
+	# Clear behavior tilemaps
+	for behavior in behaviors:
+		get_tilemap_from_root(behavior.path).clear()
+	
+	# Run tiling algorithms on tilemaps
 	for behavior in behaviors:
 		var _arguments = [base, behavior.source_tile_index, get_tilemap_from_root(behavior.path), behavior.tile_index]
 		for val in behavior.optional_parameters:
 			_arguments.push_back(val)
 		print(ALGORITHMS[behavior.behavior])
 		callv(ALGORITHMS[behavior.behavior], _arguments)
-	# TODO: Check if autotile coordinates are offset by tile region position
+
+"""
+Child script setup functions
+"""
+
+func add_tiling_behavior(tiling_behavior : TilingBehavior) -> void:
+	behaviors.push_back(tiling_behavior)
+
+func set_base(path : String) -> void:
+	base = get_editor_interface().get_edited_scene_root().get_node_or_null(path)
+
+"""
+Algorithm functions
+"""
 
 ## Fills a tilemap with the given tile id
-func tilemap_fill(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
+func algo_fill(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
 	for v in src.get_used_cells_by_id(src_ind):
 		dest.set_cellv(v, dest_ind)
 
 ## Uses 3x3min tiles to autotile a tilemap
-func tilemap_autotile_3x3min(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
+func algo_3x3min(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
 	var _a_coords = get_tilemap_autotile_coords(dest, dest_ind)
 	for v in src.get_used_cells_by_id(src_ind):
 		var _bitmask = tilemap_cell_get_bitmask(src, src_ind, v)
@@ -75,7 +89,7 @@ func tilemap_autotile_3x3min(src : TileMap, src_ind : int, dest : TileMap, dest_
 		dest.set_cellv(v, 0, false, false, false, _a_coords[_bitmask])
 
 ## Autotiles all tiles plus one down if there's a solid
-func tilemap_autotile_3x3min_one_down(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
+func algo_3x3min_one_down(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
 	var _tilemap = TileMap.new()
 	for v in src.get_used_cells_by_id(src_ind):
 		_tilemap.set_cellv(v, 0)
@@ -83,11 +97,11 @@ func tilemap_autotile_3x3min_one_down(src : TileMap, src_ind : int, dest : TileM
 		var _cell = src.get_cellv(v + Vector2.DOWN)
 		if _cell != src_ind && _cell != TileMap.INVALID_CELL:
 			_tilemap.set_cellv(v + Vector2.DOWN, 0)
-	tilemap_autotile_3x3min(_tilemap, 0, dest, dest_ind)
+	algo_3x3min(_tilemap, 0, dest, dest_ind)
 	_tilemap.queue_free()
 
 ## Autotiles only free top tiles
-func tilemap_autotile_3x3min_snow(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int, exclude : String, exclude_ind : int) -> void:
+func algo_snow(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int, exclude : String, exclude_ind : int) -> void:
 	var _tilemap = TileMap.new()
 	# Get all top tiles
 	for v in src.get_used_cells_by_id(src_ind):
@@ -103,7 +117,7 @@ func tilemap_autotile_3x3min_snow(src : TileMap, src_ind : int, dest : TileMap, 
 	for key in _a_coord:
 		print(key, ":", _a_coord[key])
 	
-	tilemap_autotile_3x3min(_tilemap, 0, dest, dest_ind)
+	algo_3x3min(_tilemap, 0, dest, dest_ind)
 	_tilemap.queue_free()
 
 ## Autotiles random rectangular rocks onto a tilemap
@@ -111,7 +125,7 @@ const ROCK_SIZE_MIN : int = 2
 const ROCK_SIZE_MAX : int = 4
 const ROCK_NUMBER : int = 24 # per 100 tiles
 
-func tilemap_autotile_rocks(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
+func algo_rocks(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
 	var _cells = src.get_used_cells_by_id(src_ind)
 	var _area = Util.tilemap_get_used_rect_by_id(src, src_ind)
 	var _number = _cells.size() / 100 * ROCK_NUMBER
@@ -136,7 +150,7 @@ func tilemap_autotile_rocks(src : TileMap, src_ind : int, dest : TileMap, dest_i
 				rock_tilemap.set_cell(x, y, 0)
 	
 	# Autotile the rocks onto the destination tilemap
-	tilemap_autotile_3x3min(rock_tilemap, 0, dest, dest_ind)
+	algo_3x3min(rock_tilemap, 0, dest, dest_ind)
 	
 	# Clear up after rock tiling algorithm
 	_area = dest.get_used_rect()
@@ -146,6 +160,31 @@ func tilemap_autotile_rocks(src : TileMap, src_ind : int, dest : TileMap, dest_i
 				dest.set_cell(x, y, TileMap.INVALID_CELL)
 	
 	rock_tilemap.queue_free()
+
+const LAYER_SIZE : int = 3
+const LAYER_FREQUENCY : float = 0.2
+const LAYER_AMPLITUDE : float = 1.0
+func algo_layers(src : TileMap, src_ind : int, dest : TileMap, dest_ind : int) -> void:
+	var a = TileMap.new()
+	var b = TileMap.new()
+	var _area = Util.tilemap_get_used_rect_by_id(src, src_ind)
+	for x in range(_area.position.x, _area.position.x + _area.size.x + 1):
+		for y in range(_area.position.y, _area.position.y + _area.size.y + 1):
+			var _wave = sin(x * PI * LAYER_FREQUENCY) * LAYER_AMPLITUDE
+			var _tmap = a if fmod(y + _wave, 4.0) >= 2.0 else b
+			_tmap.set_cell(x, y, 0)
+	algo_3x3min(a, 0, dest, dest_ind)
+	algo_3x3min(b, 0, dest, dest_ind)
+	for x in range(_area.position.x, _area.position.x + _area.size.x + 1):
+		for y in range(_area.position.y, _area.position.y + _area.size.y + 1):
+			if src.get_cell(x, y) == TileMap.INVALID_CELL:
+				dest.set_cell(x, y, TileMap.INVALID_CELL)
+	a.queue_free()
+	b.queue_free()
+
+"""
+Algorithm function helpers
+"""
 
 ## Looks for a TileMap node using the scene root as a starting point
 func get_tilemap_from_root(path : String) -> TileMap:

@@ -3,6 +3,8 @@ extends Node
 const PLAYER_SCENE_PATH = "res://objects/player/player.tscn"
 var player
 
+
+
 # TODO: Add a bunch of button checks for settings like
 # fullscreen and vsync
 func _ready() -> void:
